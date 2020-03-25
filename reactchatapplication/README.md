@@ -3,7 +3,7 @@
 - [ ] Base frontend chat app W/ Socket.io
 - [ ] React-Material for UI
 - [ ] Guest
-    - [/] Chat Screen
+    - [ ] Chat Screen
     - [ ] Admin Login Screen [JWT, or PASSPORT.JS]
 - [ ] Admin
     - [ ] Event History : Event Type(CONNECTED, JOINED, ERROR), Date, Time, User, EventID, PPID 
