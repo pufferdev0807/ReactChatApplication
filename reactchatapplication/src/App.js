@@ -1,28 +1,48 @@
-import React from 'react';
-import GuestScreen from './Components/GuestScreen';
-import socketIOClient from 'socket.io-client';
-import {Button} from '@material-ui/core'
-import './app-style.css';
+import React from "react";
+import GuestScreen from "./Components/GuestScreen";
+import socketIOClient from "socket.io-client";
+import "./app-style.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
+import Landing from "./Components/Lading";
 
 let socket;
 
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
-
-    }
+    this.state = {
+      chatRoomList: [
+        "General Chat",
+        "Gaming",
+        "18+",
+        "Politics",
+        "Anime",
+        "Star-Trek"
+      ],
+      nameIsSet: false
+    };
     socket = socketIOClient("localhost:3001");
   }
 
-  render(){
-    return(
-        <div className="container">
-        <button className="adminBtn">Admin Login</button>
-        <GuestScreen></GuestScreen>
+  location = () => {
+    if (this.state.nameIsSet) {
+      return (
+        <div className="chatContainer">
+          <Button variant="dark" className="adminBtn">
+            Admin Login
+          </Button>
+          <GuestScreen />
         </div>
-    );
+      );
+    } else {
+      return <Landing chatRoomList={this.state.chatRoomList} />;
+    }
+  };
+
+  render() {
+    return this.location();
   }
 }
 
-export {App, socket}
+export { App, socket };
