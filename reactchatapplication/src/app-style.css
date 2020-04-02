@@ -51,10 +51,9 @@ body {
   background-color: lightgrey;
   margin: auto;
   height: 92vh;
-  width: 50%;
+  min-width: 50%;
   border-radius: 8px;
 }
-
 .roomList {
   overflow-y: auto;
   overflow-x: hidden;

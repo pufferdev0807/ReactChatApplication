@@ -5,7 +5,6 @@ import "./app-style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import Landing from "./Components/Lading";
-
 let socket;
 
 class App extends React.Component {
@@ -18,7 +17,8 @@ class App extends React.Component {
         "18+",
         "Politics",
         "Anime",
-        "Star-Trek"
+        "Star-Trek",
+        "COVID-19"
       ],
       nameIsSet: false
     };
@@ -33,7 +33,6 @@ class App extends React.Component {
             Admin Login
           </Button>
           <GuestScreen />
-          {/*test comment */}
         </div>
       );
     } else {

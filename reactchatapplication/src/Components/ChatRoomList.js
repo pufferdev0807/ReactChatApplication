@@ -4,13 +4,12 @@ export default class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chatRoomList: [...this.props.chatRoomList],
-      selectedRoom: ""
+      chatRoomList: [...this.props.chatRoomList]
     };
   }
 
-  setRoom = e => {
-    this.setState({ selectedRoom: e.target.value });
+  setRoom = event => {
+    this.props.onRoomSelect(event.target.value);
   };
 
   render() {
@@ -30,7 +29,6 @@ export default class ChatRoom extends React.Component {
             );
           })}
         </ListGroup>
-        Selected room {this.state.selectedRoom}
       </div>
     );
   }

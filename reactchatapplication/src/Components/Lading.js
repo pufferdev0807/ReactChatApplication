@@ -1,42 +1,68 @@
 import React from "react";
 import { Form, Button, InputGroup, Container, Row, Col } from "react-bootstrap";
 import ChatRoomList from "./ChatRoomList";
+import GuestScreen from "./GuestScreen";
 
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       chatRoomList: [...this.props.chatRoomList],
-      nameIsSet: this.props.nameIsSet,
-      selectedRoom: ""
+      selectedRoom: undefined,
+      name: undefined
     };
   }
 
-  selectionMade = () => {
-    this.setState({ nameIsSet: true, selectedRoom: "RoomClicked!!" });
-    console.log(this.state.selectedRoom);
+  selectionMade = roomChange => {
+    this.setState({ selectedRoom: roomChange });
   };
 
+  handleChange = event => {
+    this.setState({ name: event.target.value });
+  };
+  handleClick = () => {
+    if (this.state.name === undefined) {
+      console.log("Name must be set.");
+    } else if (this.state.selectedRoom === undefined) {
+      console.log("Room must be set.");
+    } else {
+      console.log("Room and Name are set!");
+      return <GuestScreen />;
+    }
+  };
   render() {
     return (
       <Container className="landingContainer">
-        <Row className="justify-content-md-center">
-          <h1 className="display-4">Chat Application</h1>
-        </Row>
-        <Row>
-          <Col className="ml-4 pt-2" sm={8}>
+        <Col>
+          <Row className="justify-content-md-center">
+            <h1 className="display-5 p-3">Chat Application</h1>
+          </Row>
+          <Row className="row justify-content-center" sm={2}>
             <InputGroup>
               <InputGroup.Text>Name:</InputGroup.Text>
-              <Form.Control type="text" placeholder="Enter Username" />
-              <Button onClick={this.selectionMade} variant="dark">
+              <Form.Control
+                onChange={this.handleChange}
+                type="text"
+                placeholder="Enter Username"
+              />
+              <Button onClick={this.handleClick} variant="dark">
                 Enter
               </Button>
             </InputGroup>
-          </Col>
-          <Col sm={3}>
-            <ChatRoomList chatRoomList={this.state.chatRoomList}></ChatRoomList>
-          </Col>
-        </Row>
+          </Row>
+          <Row>
+            <br />
+          </Row>
+          <Row className="row justify-content-center" sm={3}>
+            <Col>
+              <ChatRoomList
+                onRoomSelect={this.selectionMade}
+                chatRoomList={this.state.chatRoomList}
+              ></ChatRoomList>
+            </Col>
+            <Col sm={1}>Selected Room:{this.state.selectedRoom}</Col>
+          </Row>
+        </Col>
       </Container>
     );
   }
