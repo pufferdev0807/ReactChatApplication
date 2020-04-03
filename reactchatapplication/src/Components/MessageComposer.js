@@ -1,6 +1,7 @@
 import React from "react";
 import { socket } from "../App";
 import { Form, Button, InputGroup } from "react-bootstrap";
+import moment from "moment";
 
 class MessageComposer extends React.Component {
   constructor(props) {
@@ -18,11 +19,14 @@ class MessageComposer extends React.Component {
   };
 
   sendMessage = () => {
+    //substitute time for something more meaningful
+    let time = moment().format("HH:mm:ss");
     if (this.state.msg !== "") {
       let message = {
         sender: this.state.name,
         msg: this.state.msg,
-        room: this.state.room
+        room: this.state.room,
+        time: time
       };
       console.log(
         `${message.name} emitting message: ${message.msg} in room ${message.room}`
@@ -31,12 +35,19 @@ class MessageComposer extends React.Component {
     }
   };
 
+  onEnterKey = e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      this.sendMessage();
+    }
+  };
   render() {
     return (
       <InputGroup className="composeArea">
         <Form.Control
           size="lg"
           className="composeField"
+          onKeyDown={this.onEnterKey}
           onChange={this.handleChange}
           type="text"
           placeholder="Type here..."

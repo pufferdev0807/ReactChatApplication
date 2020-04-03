@@ -5,27 +5,31 @@ export default class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chatRoomList: [...this.props.chatRoomList]
+      usersList: [
+        "Igor",
+        "Josh",
+        "Kevin",
+        "Klifford",
+        "David",
+        "Jin",
+        "Emma",
+        "Davina",
+        "John"
+      ]
     };
   }
 
-  setRoom = event => {
-    this.props.onRoomSelect(event.target.value);
-  };
-
   render() {
     return (
-      <div>
-        <ListGroup className="roomList">
+      <div className="userList">
+        <ListGroup className="userList">
           <ListGroup.Item disabled>
-            <b>Room List</b>
+            <b>Users List</b>
           </ListGroup.Item>
-          {this.state.chatRoomList.map((val, ctr) => {
+          {this.state.usersList.map((val, ctr) => {
             return (
               <React.Fragment key={ctr}>
-                <ListGroup.Item action onClick={this.setRoom} value={val}>
-                  {val}
-                </ListGroup.Item>
+                <ListGroup.Item>{val}</ListGroup.Item>
               </React.Fragment>
             );
           })}

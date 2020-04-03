@@ -30,7 +30,7 @@ class MessageArea extends React.Component {
               return (
                 <div className="entry" key={ctr}>
                   <p>
-                    <b>{val.sender}</b> : {val.msg}
+                    <b>{val.sender}</b> : {val.msg} - <small>{val.time}</small>
                   </p>
                   <br />
                 </div>

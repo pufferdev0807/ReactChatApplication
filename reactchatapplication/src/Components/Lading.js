@@ -13,6 +13,7 @@ export default class Landing extends React.Component {
       isLoggedIn: false
     };
   }
+
   selectionMade = roomChange => {
     this.setState({ selectedRoom: roomChange });
   };
@@ -20,6 +21,7 @@ export default class Landing extends React.Component {
   handleChange = event => {
     this.setState({ name: event.target.value });
   };
+
   handleClick = () => {
     if (this.state.name === undefined || this.state.name === "") {
       console.log("Name must be set.");
@@ -32,6 +34,14 @@ export default class Landing extends React.Component {
       this.setState({ isLoggedIn: true });
     }
   };
+
+  onEnterKey = e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      this.handleClick();
+    }
+  };
+
   whichToRender = () => {
     if (!this.state.isLoggedIn) {
       return (
@@ -44,6 +54,7 @@ export default class Landing extends React.Component {
               <InputGroup>
                 <InputGroup.Text>Name:</InputGroup.Text>
                 <Form.Control
+                  onKeyDown={this.onEnterKey}
                   onChange={this.handleChange}
                   type="text"
                   placeholder="Enter Username"
@@ -56,6 +67,9 @@ export default class Landing extends React.Component {
             <Row>
               <br />
             </Row>
+            <Row className="row justify-content-center">
+              <b>Selected Room: {this.state.selectedRoom}</b>
+            </Row>
             <Row className="row justify-content-center" sm={3}>
               <Col>
                 <ChatRoomList
@@ -63,7 +77,6 @@ export default class Landing extends React.Component {
                   chatRoomList={this.state.chatRoomList}
                 ></ChatRoomList>
               </Col>
-              <Col sm={1}>Selected Room:{this.state.selectedRoom}</Col>
             </Row>
           </Col>
         </Container>

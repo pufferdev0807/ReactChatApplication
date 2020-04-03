@@ -1,14 +1,14 @@
 # General Specifications
 
-## Admin Credentials
-
-admin/admin
-
 ## Project Members
 
 - Klifford Agujar 101145584
 - Kevin Hy 101078240
 - Igor Teixeira Belem 100907699
+
+## Admin Credentials
+
+admin/admin
 
 ## Frontend
 
@@ -34,10 +34,12 @@ admin/admin
 - [ ] Chat History : MessageID, Date, Time, Sender, Receiver, Message, Room
 - [ ] Rooms : RoomID, Room Name, Created Date, Edit Date, Status
 
-# API targets
+## API targets
 
 `htttp://localhost:${port}/api/event-history`
 `htttp://localhost:${port}/api/chat-history`
 `htttp://localhost:${port}/api/rooms`
 
-# Technologies
+## Technologies
+
+Moment.js
