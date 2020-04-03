@@ -42,6 +42,7 @@ class MessageComposer extends React.Component {
     return (
       <InputGroup className="composeArea">
         <Form.Control
+          ref="chatInput"
           size="lg"
           className="composeField"
           onKeyDown={this.onEnterKey}

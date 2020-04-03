@@ -23,7 +23,8 @@ export default class Landing extends React.Component {
     this.setState({ name: event.target.value });
   };
 
-  handleClick = () => {
+  handleClick = e => {
+    e.preventDefault();
     if (this.state.name === undefined || this.state.name === "") {
       console.log("Name must be set.");
     } else if (
