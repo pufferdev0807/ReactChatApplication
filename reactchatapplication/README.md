@@ -1,10 +1,10 @@
 # General Specifications
 
-# Admin Credentials
+## Admin Credentials
 
 admin/admin
 
-# Project Members
+## Project Members
 
 - Klifford Agujar 101145584
 - Kevin Hy 101078240
