@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button, InputGroup, Container, Row, Col } from "react-bootstrap";
 import ChatRoomList from "./ChatRoomList";
 import GuestScreen from "./GuestScreen";
-
+import { socket } from "../App";
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,8 @@ export default class Landing extends React.Component {
       chatRoomList: [...this.props.chatRoomList],
       selectedRoom: undefined,
       name: undefined,
-      isLoggedIn: false
+      isLoggedIn: false,
+      userList: []
     };
   }
 
@@ -31,7 +32,15 @@ export default class Landing extends React.Component {
     ) {
       console.log("Room must be set.");
     } else {
-      this.setState({ isLoggedIn: true });
+      this.setState({
+        isLoggedIn: true,
+        userList: [...this.state.userList, this.state.name]
+      });
+      let message = {
+        room: this.state.selectedRoom,
+        name: this.state.name
+      };
+      socket.emit("usersListUpdate", message);
     }
   };
 
@@ -86,6 +95,7 @@ export default class Landing extends React.Component {
         <GuestScreen
           name={this.state.name}
           selectedRoom={this.state.selectedRoom}
+          userList={this.state.userList}
         />
       );
   };

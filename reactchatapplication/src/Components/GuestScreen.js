@@ -10,7 +10,8 @@ export default class App extends React.Component {
     this.state = {
       alltext: [],
       room: this.props.selectedRoom,
-      name: this.props.name
+      name: this.props.name,
+      userList: this.props.userList
     };
   }
   render() {
@@ -29,7 +30,7 @@ export default class App extends React.Component {
               ></MessageComposer>
             </Col>
             <Col sm={2}>
-              <UserList />
+              <UserList userList={this.state.userList} />
             </Col>
           </Row>
         </Col>

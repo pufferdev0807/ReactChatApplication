@@ -28,9 +28,6 @@ class MessageComposer extends React.Component {
         room: this.state.room,
         time: time
       };
-      console.log(
-        `${message.name} emitting message: ${message.msg} in room ${message.room}`
-      );
       socket.emit("message", message);
     }
   };

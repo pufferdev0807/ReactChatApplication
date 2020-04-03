@@ -15,7 +15,6 @@ class MessageArea extends React.Component {
   }
   componentDidMount() {
     socket.on("response", data => {
-      console.log(`received ${data.msg}`);
       this.setState({ alltext: [...this.state.alltext, data] });
     });
   }
