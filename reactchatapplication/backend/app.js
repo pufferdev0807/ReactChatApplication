@@ -44,15 +44,15 @@ io.on("connection", (socket) => {
   socket.on("message", (data) => {
     room = data.room;
     msg = data.msg;
-    //console.log(data);
+    console.log(data);
     io.to(`${room}`).emit("response", data);
   });
 
   socket.on("usersListUpdate", (data) => {
     room = data.room;
     socket.join(`${room}`);
-    userList.general = [...userList.general, data.name];
-    //console.log(`userlist in ${room} is ${userList[room]}`);
+    userList[room] = [...userList[room], data.name];
+    console.log(`userlist in ${room} is ${userList[room]}`);
     io.to(`${room}`).emit("updateList", userList[data.room]);
   });
 
@@ -61,9 +61,10 @@ io.on("connection", (socket) => {
     if (typeof data.room !== "undefined" || typeof data.name !== "undefined") {
       //console.log(`${data.name} has left ${data.room}`);
       room = data.room;
-      console.log(userList);
+      socket.leave(room);
+      // console.log(userList);
       userList[room] = userList[room].filter((usr) => usr !== data.name);
-      console.log(userList);
+      // console.log(userList);
       io.to(`${room}`).emit("updateList", userList[room]);
     } else {
       console.log("prevented crash!");
