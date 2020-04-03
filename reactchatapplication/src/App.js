@@ -1,10 +1,9 @@
 import React from "react";
-import GuestScreen from "./Components/GuestScreen";
 import socketIOClient from "socket.io-client";
 import "./app-style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
 import Landing from "./Components/Lading";
+
 let socket;
 
 class App extends React.Component {
@@ -19,29 +18,18 @@ class App extends React.Component {
         "Anime",
         "Star-Trek",
         "COVID-19"
-      ],
-      nameIsSet: false
+      ]
     };
-    socket = socketIOClient("localhost:3001");
+
+    //socket = socketIOClient("184.145.64.148:3001"); IP for when deployed goes here
+    socket = socketIOClient("localhost:3001"); // Used for Testing
   }
-
-  location = () => {
-    if (this.state.nameIsSet) {
-      return (
-        <div className="chatContainer">
-          <Button variant="dark" className="adminBtn">
-            Admin Login
-          </Button>
-          <GuestScreen />
-        </div>
-      );
-    } else {
-      return <Landing chatRoomList={this.state.chatRoomList} />;
-    }
-  };
-
   render() {
-    return this.location();
+    return (
+      <>
+        <Landing chatRoomList={this.state.chatRoomList} />
+      </>
+    );
   }
 }
 

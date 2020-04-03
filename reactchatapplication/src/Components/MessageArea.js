@@ -8,9 +8,7 @@ class MessageArea extends React.Component {
       alltext: [...this.props.alltext]
     };
   }
-  componentWillReceiveProps(newprops) {
-    this.setState({ alltext: newprops.alltext });
-  }
+
   componentDidUpdate() {
     let msgArea = document.getElementById("messageArea");
     msgArea.scrollTop = msgArea.scrollHeight;
@@ -31,7 +29,9 @@ class MessageArea extends React.Component {
           ? this.state.alltext.map((val, ctr) => {
               return (
                 <div className="entry" key={ctr}>
-                  <p>{val.msg}</p>
+                  <p>
+                    <b>{val.sender}</b> : {val.msg}
+                  </p>
                   <br />
                 </div>
               );

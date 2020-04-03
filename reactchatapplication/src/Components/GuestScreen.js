@@ -7,16 +7,23 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       alltext: [],
-      msg: "",
-      room: ""
+      room: this.props.selectedRoom,
+      name: this.props.name
     };
   }
   render() {
     return (
       <>
-        <h1>Chat Room Name</h1>
-        <MessageArea alltext={this.state.alltext}></MessageArea>
-        <MessageComposer></MessageComposer>
+        <div className="chatContainer">
+          <h1 className="display-5 justfy-content-md-center">
+            {this.state.room}
+          </h1>
+          <MessageArea alltext={this.state.alltext}></MessageArea>
+          <MessageComposer
+            room={this.state.room}
+            name={this.state.name}
+          ></MessageComposer>
+        </div>
       </>
     );
   }
