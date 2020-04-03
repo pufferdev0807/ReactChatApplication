@@ -24,29 +24,55 @@ let eventHistoryModel = require("./models/event");
 mongoose.connect(
   conf,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  err => {
+  (err) => {
     if (err) throw err;
-    else console.log("Successfully connected to onntected to remote DB");
+    else console.log("Successfully connected to remote DB");
   }
 );
 
-io.on("connection", socket => {
-  socket.on("message", data => {
+userList = {
+  general: [],
+  gaming: [],
+  nsfw: [],
+  politics: [],
+  anime: [],
+  startrek: [],
+  chinaflu: [],
+};
+
+io.on("connection", (socket) => {
+  socket.on("message", (data) => {
     room = data.room;
     msg = data.msg;
-    socket.join(`${room}`);
-    console.log(data);
+    //console.log(data);
     io.to(`${room}`).emit("response", data);
   });
-  socket.on("usersListUpdate", data => {
+
+  socket.on("usersListUpdate", (data) => {
     room = data.room;
-    name = data.name;
-    io.to(`${room}`).emit("updateList", data);
+    socket.join(`${room}`);
+    userList.general = [...userList.general, data.name];
+    //console.log(`userlist in ${room} is ${userList[room]}`);
+    io.to(`${room}`).emit("updateList", userList[data.room]);
+  });
+
+  socket.on("user-disconnect", (data) => {
+    //console.log(`receiving emit ${data.name} disconnect from ${data.room}`);
+    if (typeof data.room !== "undefined" || typeof data.name !== "undefined") {
+      //console.log(`${data.name} has left ${data.room}`);
+      room = data.room;
+      console.log(userList);
+      userList[room] = userList[room].filter((usr) => usr !== data.name);
+      console.log(userList);
+      io.to(`${room}`).emit("updateList", userList[room]);
+    } else {
+      console.log("prevented crash!");
+    }
   });
 });
 
 var writeStream = fs.createWriteStream(path.join(__dirname, "http.log"), {
-  flags: "a"
+  flags: "a",
 });
 
 const messageRoute = require("./routes/messages");
@@ -68,7 +94,7 @@ app.use((req, res) => {
   eventHistoryModel().create({
     type: "REQUEST ERROR",
     user: `Generic Client`,
-    PPID: 1111
+    PPID: 1111,
   });
 });
 
