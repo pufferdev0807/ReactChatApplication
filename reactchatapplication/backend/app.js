@@ -64,7 +64,8 @@ io.on("connection", (socket) => {
       socket.leave(room);
       // console.log(userList);
       userList[room] = userList[room].filter((usr) => usr !== data.name);
-      // console.log(userList);
+      console.log(`${data.name} has left ${room}`);
+      console.log(`Users in ${room} : ${userList[room]}`);
       io.to(`${room}`).emit("updateList", userList[room]);
     } else {
     }

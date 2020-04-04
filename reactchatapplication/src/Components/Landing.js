@@ -13,7 +13,7 @@ export default class Landing extends React.Component {
       chatRoomList: [...this.props.chatRoomList],
       selectedRoom: undefined,
       name: undefined,
-      isisNameSet: false,
+      navLocation: "",
       userList: [],
     };
   }
@@ -42,7 +42,7 @@ export default class Landing extends React.Component {
       });
     } else {
       this.setState({
-        isisNameSet: true,
+        navLocation: "NameSet",
         userList: [...this.state.userList, this.state.name],
       });
       let message = {
@@ -84,14 +84,19 @@ export default class Landing extends React.Component {
       this.handleClick();
     }
   };
+  setLocLogin = () => {
+    this.setState({ navLocation: "loginScreen" });
+  };
 
   whichToRender = () => {
-    if (!this.state.isisNameSet) {
+    if (this.state.navLocation === "") {
       return (
-        <Container>
+        <Container className="landingContainer">
           <Col>
             <Row className="float-right" sm={1}>
-              <Button>Admin Panel</Button>
+              <Button size="sm" variant="dark" onClick={this.setLocLogin}>
+                Admin Panel
+              </Button>
             </Row>
             <Row className="justify-content-md-center">
               <h1 className="display-5">Chat Application</h1>
@@ -128,7 +133,8 @@ export default class Landing extends React.Component {
           </Col>
         </Container>
       );
-    } else
+    } else if (this.state.navLocation === "NameSet") {
+      console.log(this.state.navLocation);
       return (
         <Room
           name={this.state.name}
@@ -136,6 +142,9 @@ export default class Landing extends React.Component {
           userList={this.state.userList}
         />
       );
+    } else if (this.state.navLocation === "loginScreen") {
+      return <Login />;
+    }
   };
   render() {
     return <this.whichToRender />;

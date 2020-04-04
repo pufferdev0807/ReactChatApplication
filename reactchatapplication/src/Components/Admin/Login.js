@@ -34,7 +34,9 @@ class Login extends React.Component {
                 Password:
                 <FormControl placeholder="Password" />
               </FormGroup>
-              <Button type="submit">Login</Button>
+              <Button variant="dark" type="submit">
+                Login
+              </Button>
             </Form>
           </Row>
         </Col>
