@@ -30,7 +30,6 @@ mongoose.connect(
   }
 );
 
-//userlist from each room
 userList = {
   general: [],
   gaming: [],
@@ -40,6 +39,7 @@ userList = {
   startrek: [],
   chinaflu: [],
 };
+
 
 io.on("connection", (socket) => {
   socket.on("message", (data) => {
