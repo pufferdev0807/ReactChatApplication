@@ -29,10 +29,10 @@ admin/admin
   - [ ] Socket.io
   - [x] Database API
 - [x] Database - MongoDB Remote
-- [ ] Admin User table
-- [ ] Event History : Event Type(CONNECTED, JOINED, ERROR), Date, Time, User, EventID, PPID
-- [ ] Chat History : MessageID, Date, Time, Sender, Receiver, Message, Room
-- [ ] Rooms : RoomID, Room Name, Created Date, Edit Date, Status
+- [x] Admin User table
+- [x] Event History : Event Type(CONNECTED, JOINED, ERROR), Date, Time, User, EventID, PPID
+- [x] Chat History : MessageID, Date, Time, Sender, Receiver, Message, Room
+- [x] Rooms : RoomID, Room Name, Created Date, Edit Date, Status
 
 ## API targets
 
