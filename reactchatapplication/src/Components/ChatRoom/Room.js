@@ -11,7 +11,7 @@ export default class App extends React.Component {
       alltext: [],
       room: this.props.selectedRoom,
       name: this.props.name,
-      userList: this.props.userList
+      userList: this.props.userList,
     };
   }
   render() {

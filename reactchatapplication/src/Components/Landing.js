@@ -1,10 +1,10 @@
 import React from "react";
 import { Form, Button, InputGroup, Container, Row, Col } from "react-bootstrap";
-import ChatRoomList from "./ChatRoomList";
-import GuestScreen from "./GuestScreen";
+import RoomList from "./RoomList";
+import Room from "./ChatRoom/Room";
 import { socket } from "../App";
-import NotificationSystem from 'react-notification-system';
-
+import NotificationSystem from "react-notification-system";
+import Login from "./Admin/Login";
 
 export default class Landing extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class Landing extends React.Component {
       chatRoomList: [...this.props.chatRoomList],
       selectedRoom: undefined,
       name: undefined,
-      isLoggedIn: false,
+      isisNameSet: false,
       userList: [],
     };
   }
@@ -22,27 +22,27 @@ export default class Landing extends React.Component {
   telling them to enter username/select a room
   */
   notificationSystem = React.createRef();
-  addNotification = event => {
+  addNotification = (event) => {
     event.preventDefault();
     const notification = this.notificationSystem.current;
     if (this.state.name === undefined || this.state.name === "") {
       console.log("Name must be set.");
       notification.addNotification({
-        message: 'Please enter a username.',//message to be displayed
-        level: 'warning'//type of notification (success, error, warning, info)
+        message: "Please enter a username.", //message to be displayed
+        level: "warning", //type of notification (success, error, warning, info)
       });
-    } 
-    else if (
-      this.state.selectedRoom === undefined || this.state.selectedRoom === "") {
+    } else if (
+      this.state.selectedRoom === undefined ||
+      this.state.selectedRoom === ""
+    ) {
       console.log("Room must be set.");
       notification.addNotification({
-        message: 'Please select a room to join.',
-        level: 'warning'
+        message: "Please select a room to join.",
+        level: "warning",
       });
-    } 
-    else {
+    } else {
       this.setState({
-        isLoggedIn: true,
+        isisNameSet: true,
         userList: [...this.state.userList, this.state.name],
       });
       let message = {
@@ -52,7 +52,6 @@ export default class Landing extends React.Component {
       console.log(`user ${message.name} is joining ${message.room}`);
       socket.emit("usersListUpdate", message);
     }
-
   };
 
   selectionMade = (roomChange) => {
@@ -87,12 +86,15 @@ export default class Landing extends React.Component {
   };
 
   whichToRender = () => {
-    if (!this.state.isLoggedIn) {
+    if (!this.state.isisNameSet) {
       return (
         <Container>
           <Col>
+            <Row className="float-right" sm={1}>
+              <Button>Admin Panel</Button>
+            </Row>
             <Row className="justify-content-md-center">
-              <h1 className="display-5 p-3">Chat Application</h1>
+              <h1 className="display-5">Chat Application</h1>
             </Row>
             <Row className="row justify-content-center" sm={2}>
               <InputGroup>
@@ -103,9 +105,10 @@ export default class Landing extends React.Component {
                   type="text"
                   placeholder="Enter Username"
                 />
-                <button onClick={this.addNotification} variant="dark">Enter Room!</button>
+                <button onClick={this.addNotification} variant="dark">
+                  Enter Room!
+                </button>
                 <NotificationSystem ref={this.notificationSystem} />
-
               </InputGroup>
             </Row>
             <Row>
@@ -116,10 +119,10 @@ export default class Landing extends React.Component {
             </Row>
             <Row className="row justify-content-center" sm={3}>
               <Col>
-                <ChatRoomList
+                <RoomList
                   onRoomSelect={this.selectionMade}
                   chatRoomList={this.state.chatRoomList}
-                ></ChatRoomList>
+                ></RoomList>
               </Col>
             </Row>
           </Col>
@@ -127,7 +130,7 @@ export default class Landing extends React.Component {
       );
     } else
       return (
-        <GuestScreen
+        <Room
           name={this.state.name}
           selectedRoom={this.state.selectedRoom}
           userList={this.state.userList}

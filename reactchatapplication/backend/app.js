@@ -40,7 +40,6 @@ userList = {
   chinaflu: [],
 };
 
-
 io.on("connection", (socket) => {
   socket.on("message", (data) => {
     room = data.room;
@@ -53,7 +52,7 @@ io.on("connection", (socket) => {
     room = data.room;
     socket.join(`${room}`);
     userList[room] = [...userList[room], data.name];
-    console.log(`userlist in ${room} is ${userList[room]}`);
+    console.log(`Users in ${room} : ${userList[room]}`);
     io.to(`${room}`).emit("updateList", userList[data.room]);
   });
 
@@ -68,7 +67,6 @@ io.on("connection", (socket) => {
       // console.log(userList);
       io.to(`${room}`).emit("updateList", userList[room]);
     } else {
-      console.log("prevented crash!");
     }
   });
 });

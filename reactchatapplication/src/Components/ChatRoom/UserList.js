@@ -1,6 +1,6 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import { socket } from "../App";
+import { socket } from "../../App";
 export default class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
@@ -12,8 +12,6 @@ export default class ChatRoom extends React.Component {
   componentDidMount = () => {
     console.log("Updated");
     socket.on("updateList", (data) => {
-      console.log("Response received from frontend");
-      console.log(data);
       this.setState({ userList: [...data] });
     });
   };

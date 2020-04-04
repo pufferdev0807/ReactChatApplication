@@ -1,5 +1,5 @@
 import React from "react";
-import { socket } from "../App";
+import { socket } from "../../App";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import moment from "moment";
 
@@ -9,12 +9,12 @@ class MessageComposer extends React.Component {
     this.state = {
       name: this.props.name,
       room: this.props.room,
-      msg: ""
+      msg: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ msg: event.target.value });
   };
 
@@ -28,14 +28,14 @@ class MessageComposer extends React.Component {
         sender: this.state.name,
         msg: this.state.msg,
         room: this.state.room,
-        time: time
+        time: time,
       };
       socket.emit("message", message);
     }
     this.handleSubmit();
   };
 
-  onEnterKey = e => {
+  onEnterKey = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       this.sendMessage();

@@ -1,11 +1,11 @@
 import React from "react";
-import { socket } from "../App";
+import { socket } from "../../App";
 
 class MessageArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      alltext: [...this.props.alltext]
+      alltext: [...this.props.alltext],
     };
   }
 
@@ -14,7 +14,7 @@ class MessageArea extends React.Component {
     msgArea.scrollTop = msgArea.scrollHeight;
   }
   componentDidMount() {
-    socket.on("response", data => {
+    socket.on("response", (data) => {
       this.setState({ alltext: [...this.state.alltext, data] });
     });
   }
@@ -29,7 +29,11 @@ class MessageArea extends React.Component {
               return (
                 <div className="entry" key={ctr}>
                   <p>
-                    <b>{val.sender}</b> - <small><i>{val.time}</i> </small> <br></br> {val.msg}
+                    <b>{val.sender}</b> -{" "}
+                    <small>
+                      <i>{val.time}</i>{" "}
+                    </small>{" "}
+                    <br></br> {val.msg}
                   </p>
                   <br />
                 </div>
