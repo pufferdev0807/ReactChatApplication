@@ -18,6 +18,8 @@ class MessageComposer extends React.Component {
     this.setState({ msg: event.target.value });
   };
 
+  handleSubmit = () => {};
+
   sendMessage = () => {
     //substitute time for something more meaningful
     let time = moment().format("HH:mm:ss");
@@ -30,6 +32,7 @@ class MessageComposer extends React.Component {
       };
       socket.emit("message", message);
     }
+    this.handleSubmit();
   };
 
   onEnterKey = e => {
@@ -42,7 +45,6 @@ class MessageComposer extends React.Component {
     return (
       <InputGroup className="composeArea">
         <Form.Control
-          ref="chatInput"
           size="lg"
           className="composeField"
           onKeyDown={this.onEnterKey}

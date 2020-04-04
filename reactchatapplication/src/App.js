@@ -11,19 +11,20 @@ class App extends React.Component {
     super(props);
     this.state = {
       chatRoomList: [
-        "General Chat",
-        "Gaming",
-        "18+",
-        "Politics",
-        "Anime",
-        "Star-Trek",
-        "COVID-19"
-      ]
+        "general",
+        "gaming",
+        "nsfw",
+        "politics",
+        "anime",
+        "startrek",
+        "chinaflu",
+      ],
     };
 
-    //socket = socketIOClient("184.145.64.148:3001"); IP for when deployed goes here
+    //socket = socketIOClient("remotehost:3001"); //IP for when deployed goes here
     socket = socketIOClient("localhost:3001"); // Used for Testing
   }
+
   render() {
     return (
       <>

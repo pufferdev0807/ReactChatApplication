@@ -11,20 +11,19 @@ export default class Landing extends React.Component {
       selectedRoom: undefined,
       name: undefined,
       isLoggedIn: false,
-      userList: []
+      userList: [],
     };
   }
 
-  selectionMade = roomChange => {
+  selectionMade = (roomChange) => {
     this.setState({ selectedRoom: roomChange });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ name: event.target.value });
   };
 
-  handleClick = e => {
-    e.preventDefault();
+  handleClick = () => {
     if (this.state.name === undefined || this.state.name === "") {
       console.log("Name must be set.");
     } else if (
@@ -35,17 +34,34 @@ export default class Landing extends React.Component {
     } else {
       this.setState({
         isLoggedIn: true,
-        userList: [...this.state.userList, this.state.name]
+        userList: [...this.state.userList, this.state.name],
       });
       let message = {
         room: this.state.selectedRoom,
-        name: this.state.name
+        name: this.state.name,
       };
+      console.log(`user ${message.name} is joining ${message.room}`);
       socket.emit("usersListUpdate", message);
     }
   };
 
-  onEnterKey = e => {
+  sendLastEmit = () => {
+    socket.emit("user-disconnect", {
+      name: this.state.name,
+      room: this.state.selectedRoom,
+    });
+  };
+
+  componentDidMount() {
+    window.addEventListener("beforeunload", this.sendLastEmit);
+  }
+
+  componentWillUnmount() {
+    this.sendLastEmit();
+    window.removeEventListener("beforeunload", this.sendLastEmit);
+  }
+
+  onEnterKey = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       this.handleClick();
@@ -55,7 +71,7 @@ export default class Landing extends React.Component {
   whichToRender = () => {
     if (!this.state.isLoggedIn) {
       return (
-        <Container className="landingContainer">
+        <Container>
           <Col>
             <Row className="justify-content-md-center">
               <h1 className="display-5 p-3">Chat Application</h1>

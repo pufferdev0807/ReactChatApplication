@@ -5,16 +5,20 @@ export default class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userList: []
+      userList: [...this.props.userList],
     };
   }
 
-  componentDidMount() {
-    socket.on("usersListUpdate", data => {
-      console.log("frontend received a response " + data.name);
-      this.setState({ userList: [...this.state.userList, data.name] });
+  componentDidMount = () => {
+    console.log("updated");
+    socket.on("updateList", (data) => {
+      console.log("frontend received a response ");
+      console.log(data);
+      this.setState({ userList: [...data] });
     });
-  }
+  };
+
+  component;
   render() {
     return (
       <div>
