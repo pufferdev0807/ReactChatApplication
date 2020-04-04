@@ -10,9 +10,9 @@ export default class ChatRoom extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("updated");
+    console.log("Updated");
     socket.on("updateList", (data) => {
-      console.log("frontend received a response ");
+      console.log("Response received from frontend");
       console.log(data);
       this.setState({ userList: [...data] });
     });
@@ -24,7 +24,7 @@ export default class ChatRoom extends React.Component {
       <div>
         <ListGroup className="userList">
           <ListGroup.Item disabled>
-            <b>Users List</b>
+            <b>User List</b>
           </ListGroup.Item>
           {this.state.userList.map((val, ctr) => {
             return (

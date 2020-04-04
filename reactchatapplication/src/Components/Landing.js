@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, InputGroup, Container, Row, Col, Alert } from "react-bootstrap";
+import { Form, Button, InputGroup, Container, Row, Col } from "react-bootstrap";
 import ChatRoomList from "./ChatRoomList";
 import GuestScreen from "./GuestScreen";
 import { socket } from "../App";
@@ -18,16 +18,18 @@ export default class Landing extends React.Component {
     };
   }
 
+  /*Notification system module by Igor Prado, displays messages to the user
+  telling them to enter username/select a room
+  */
   notificationSystem = React.createRef();
-
   addNotification = event => {
     event.preventDefault();
     const notification = this.notificationSystem.current;
     if (this.state.name === undefined || this.state.name === "") {
       console.log("Name must be set.");
       notification.addNotification({
-        message: 'Please enter a username.',
-        level: 'warning'
+        message: 'Please enter a username.',//message to be displayed
+        level: 'warning'//type of notification (success, error, warning, info)
       });
     } 
     else if (
@@ -48,10 +50,6 @@ export default class Landing extends React.Component {
         name: this.state.name,
       };
       console.log(`user ${message.name} is joining ${message.room}`);
-      notification.addNotification({
-        message: `user ${message.name} is joining ${message.room}`,
-        level: 'success'
-      });
       socket.emit("usersListUpdate", message);
     }
 
