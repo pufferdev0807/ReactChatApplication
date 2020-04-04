@@ -1,8 +1,11 @@
 import React from "react";
-import { Form, Button, InputGroup, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, InputGroup, Container, Row, Col, Alert } from "react-bootstrap";
 import ChatRoomList from "./ChatRoomList";
 import GuestScreen from "./GuestScreen";
 import { socket } from "../App";
+import NotificationSystem from 'react-notification-system';
+
+
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -15,23 +18,27 @@ export default class Landing extends React.Component {
     };
   }
 
-  selectionMade = (roomChange) => {
-    this.setState({ selectedRoom: roomChange });
-  };
+  notificationSystem = React.createRef();
 
-  handleChange = (event) => {
-    this.setState({ name: event.target.value });
-  };
-
-  handleClick = () => {
+  addNotification = event => {
+    event.preventDefault();
+    const notification = this.notificationSystem.current;
     if (this.state.name === undefined || this.state.name === "") {
       console.log("Name must be set.");
-    } else if (
-      this.state.selectedRoom === undefined ||
-      this.state.selectedRoom === ""
-    ) {
+      notification.addNotification({
+        message: 'Please enter a username.',
+        level: 'warning'
+      });
+    } 
+    else if (
+      this.state.selectedRoom === undefined || this.state.selectedRoom === "") {
       console.log("Room must be set.");
-    } else {
+      notification.addNotification({
+        message: 'Please select a room to join.',
+        level: 'warning'
+      });
+    } 
+    else {
       this.setState({
         isLoggedIn: true,
         userList: [...this.state.userList, this.state.name],
@@ -41,8 +48,21 @@ export default class Landing extends React.Component {
         name: this.state.name,
       };
       console.log(`user ${message.name} is joining ${message.room}`);
+      notification.addNotification({
+        message: `user ${message.name} is joining ${message.room}`,
+        level: 'success'
+      });
       socket.emit("usersListUpdate", message);
     }
+
+  };
+
+  selectionMade = (roomChange) => {
+    this.setState({ selectedRoom: roomChange });
+  };
+
+  handleChange = (event) => {
+    this.setState({ name: event.target.value });
   };
 
   sendLastEmit = () => {
@@ -85,9 +105,9 @@ export default class Landing extends React.Component {
                   type="text"
                   placeholder="Enter Username"
                 />
-                <Button onClick={this.handleClick} variant="dark">
-                  Enter
-                </Button>
+                <button onClick={this.addNotification} variant="dark">Enter Room!</button>
+                <NotificationSystem ref={this.notificationSystem} />
+
               </InputGroup>
             </Row>
             <Row>

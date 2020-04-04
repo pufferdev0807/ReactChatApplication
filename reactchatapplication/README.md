@@ -41,5 +41,5 @@ admin/admin
 `htttp://localhost:${port}/api/rooms`
 
 ## Technologies
-
+React Notification System by Igor Prado https://github.com/igorprado/react-notification-system
 Moment.js

@@ -2,7 +2,8 @@ import React from "react";
 import socketIOClient from "socket.io-client";
 import "./app-style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Landing from "./Components/Lading";
+import Landing from "./Components/Landing";
+import NotificationSystem from 'react-notification-system';
 
 let socket;
 
@@ -11,13 +12,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       chatRoomList: [
-        "general",
-        "gaming",
-        "nsfw",
-        "politics",
-        "anime",
-        "supersecretroom",
-        "chinaflu",
+        "General",
+        "Gaming",
+        "NSFW",
+        "Politics",
+        "Anime",
+        "Epic Seven",
+        "COVID-19",
       ],
     };
 

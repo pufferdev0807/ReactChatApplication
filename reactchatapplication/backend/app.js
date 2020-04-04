@@ -30,6 +30,7 @@ mongoose.connect(
   }
 );
 
+//userlist from each room
 userList = {
   general: [],
   gaming: [],
