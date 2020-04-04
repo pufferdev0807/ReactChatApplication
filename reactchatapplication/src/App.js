@@ -16,14 +16,14 @@ class App extends React.Component {
         "nsfw",
         "politics",
         "anime",
-        "startrek",
+        "supersecretroom",
         "chinaflu",
       ],
     };
 
     //socket = socketIOClient("remotehost:3001"); //IP for when deployed goes here
     socket = socketIOClient("localhost:3001"); // Used for Testing
-  }
+  } 
 
   render() {
     return (
