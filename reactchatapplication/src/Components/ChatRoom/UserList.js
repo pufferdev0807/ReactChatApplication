@@ -6,6 +6,7 @@ export default class ChatRoom extends React.Component {
     super(props);
     this.state = {
       userList: [...this.props.userList],
+      userCount: 0,
     };
   }
 
@@ -13,6 +14,7 @@ export default class ChatRoom extends React.Component {
     console.log("Updated");
     socket.on("updateList", (data) => {
       this.setState({ userList: [...data] });
+      this.setState({ userCount: this.state.userList.length });
     });
   };
 
@@ -22,7 +24,7 @@ export default class ChatRoom extends React.Component {
       <div>
         <ListGroup className="userList">
           <ListGroup.Item disabled>
-            <b>User List</b>
+            <b>Users Online:{this.state.userCount}</b>
           </ListGroup.Item>
           {this.state.userList.map((val, ctr) => {
             return (
