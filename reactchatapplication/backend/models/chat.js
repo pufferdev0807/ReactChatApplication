@@ -15,8 +15,12 @@ let Message = new Schema(
       type: String,
       required: true,
     },
+    receivedby: {
+      type: String,
+      default: "All",
+    },
   },
   { timestamps: true }
 );
 
-module.exports = Message;
+module.exports = mongoose.model("message", Message);

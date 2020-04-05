@@ -3,8 +3,8 @@ const server = express.Router();
 
 let chatHistoryModel = require("../models/chat");
 
-server.route("/chatlog").get((req, res, next) => {
-  chatHistoryModel().find({}, (err, doc) => {
+server.route("/").get((req, res, next) => {
+  chatHistoryModel.find({}, (err, doc) => {
     if (err) next(err);
     res.json(doc);
   });

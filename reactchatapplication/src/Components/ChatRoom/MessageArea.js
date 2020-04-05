@@ -29,7 +29,7 @@ class MessageArea extends React.Component {
               return (
                 <div className="entry" key={ctr}>
                   <p>
-                    <b>{val.sender}</b> -{" "}
+                    <b>{val.by}</b> -{" "}
                     <small>
                       <i>{val.time}</i>{" "}
                     </small>{" "}

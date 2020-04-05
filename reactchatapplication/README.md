@@ -36,8 +36,8 @@ admin/admin
 
 ## API targets
 
-`htttp://localhost:${port}/api/event-history`
-`htttp://localhost:${port}/api/chat-history`
+`htttp://localhost:${port}/api/events`
+`htttp://localhost:${port}/api/chatlog`
 `htttp://localhost:${port}/api/rooms`
 
 ## Technologies

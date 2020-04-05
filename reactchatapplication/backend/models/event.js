@@ -5,16 +5,11 @@ let Event = new Schema(
   {
     type: {
       type: String,
-      enum: ["CONNECTED", "JOINED", "ERROR"],
+      enum: ["CONNECTION", "JOINED", "ERROR", "DISCONNECT"],
       required: true,
-    },
-    Date: {
-      type: Date,
-      default: Date.now,
     },
     User: {
       type: String,
-      required: true,
     },
     PPID: {
       type: String,
@@ -24,4 +19,4 @@ let Event = new Schema(
   { timestamps: true }
 );
 
-module.exports = Event;
+module.exports = mongoose.model("event", Event);

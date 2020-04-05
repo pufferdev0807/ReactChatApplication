@@ -21,11 +21,11 @@ class MessageComposer extends React.Component {
   handleSubmit = () => {};
 
   sendMessage = () => {
-    //substitute time for something more meaningful
+    // substitute time for something more meaningful
     let time = moment().format("HH:mm:ss");
     if (this.state.msg !== "") {
       let message = {
-        sender: this.state.name,
+        by: this.state.name,
         msg: this.state.msg,
         room: this.state.room,
         time: time,

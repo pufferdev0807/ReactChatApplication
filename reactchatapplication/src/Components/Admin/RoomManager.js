@@ -1,10 +1,11 @@
 import React from "react";
 import { MDBDataTable } from "mdbreact";
 import { Col, Row, Container, Button } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
+import ShowModal from "./AddRoomModal";
+
 class RoomManager extends React.Component {
   state = {
-    modal: false,
+    roomName: "",
     dummydata: {
       columns: [
         {
@@ -78,29 +79,7 @@ class RoomManager extends React.Component {
       ],
     },
   };
-  toggle = () => {
-    this.setState({ modal: !this.state.modal });
-  };
-  showModal = () => {
-    return (
-      <>
-        <Modal show={this.state.modal} onHide={this.toggle}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.toggle}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.toggle}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-    );
-  };
+
   render() {
     return (
       <>
@@ -128,9 +107,7 @@ class RoomManager extends React.Component {
               />
             </Row>
             <Row className="justify-content-md-center pt-5 flex" sm={6}>
-              <Button variant="dark" onClick={this.showModal}>
-                Add Room
-              </Button>
+              <ShowModal state={this.state}></ShowModal>
             </Row>
           </Col>
         </Container>
