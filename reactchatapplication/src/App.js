@@ -3,6 +3,7 @@ import socketIOClient from "socket.io-client";
 import "./app-style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Landing from "./Components/Landing";
+import AdminLanding from "./Components/Admin/AdminLanding";
 
 let socket;
 
@@ -23,12 +24,13 @@ class App extends React.Component {
 
     //socket = socketIOClient("remotehost:3001"); //IP for when deployed goes here
     socket = socketIOClient("localhost:3001"); // Used for Testing
-  } 
+  }
 
   render() {
     return (
       <>
-        <Landing chatRoomList={this.state.chatRoomList} />
+        {/*<Landing chatRoomList={this.state.chatRoomList} />*/}
+        <AdminLanding></AdminLanding>
       </>
     );
   }

@@ -2,10 +2,11 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import EventHistory from "./EventHistory";
 import ChatHistory from "./ChatHistory";
+import RoomManager from "./RoomManager";
 
 class AdminLanding extends React.Component {
   state = {
-    location: undefined,
+    location: "eventHistory",
   };
 
   whichToRender = () => {
@@ -16,7 +17,7 @@ class AdminLanding extends React.Component {
     } else if (this.state.location === "chatHistory") {
       return <ChatHistory></ChatHistory>;
     } else if (this.state.location === "roomManager") {
-      return null;
+      return <RoomManager></RoomManager>;
     }
   };
 
@@ -30,9 +31,14 @@ class AdminLanding extends React.Component {
       <>
         <Container className="landingContainer">
           <Col>
+            <Row className="justify-content-md-end" sm={12}>
+              <Button size="sm" type="button" variant="dark">
+                Logout
+              </Button>
+            </Row>
             <Row className="justify-content-md-center">
               <Col>
-                <Row sm={2} className="justify-content-md-end">
+                <Row sm={3} className="justify-content-md-end">
                   <Button
                     type="button"
                     variant="dark"
@@ -43,7 +49,7 @@ class AdminLanding extends React.Component {
                 </Row>
               </Col>
               <Col>
-                <Row sm={2} className="justify-content-md-center">
+                <Row sm={3} className="justify-content-md-center">
                   <Button
                     type="button"
                     variant="dark"
@@ -54,7 +60,7 @@ class AdminLanding extends React.Component {
                 </Row>
               </Col>
               <Col>
-                <Row sm={2} className="justify-content-md-start">
+                <Row sm={3} className="justify-content-md-start">
                   <Button
                     type="button"
                     variant="dark"
