@@ -32,9 +32,10 @@ class AdminLanding extends React.Component {
           <Col>
             <Row className="justify-content-md-center">
               <Col>
-                <Row className="justify-content-md-center">
+                <Row sm={2} className="justify-content-md-end">
                   <Button
                     type="button"
+                    variant="dark"
                     onClick={() => this.setLocation("eventHistory")}
                   >
                     Event History
@@ -42,9 +43,10 @@ class AdminLanding extends React.Component {
                 </Row>
               </Col>
               <Col>
-                <Row className="justify-content-md-center">
+                <Row sm={2} className="justify-content-md-center">
                   <Button
                     type="button"
+                    variant="dark"
                     onClick={() => this.setLocation("chatHistory")}
                   >
                     Chat History
@@ -52,9 +54,10 @@ class AdminLanding extends React.Component {
                 </Row>
               </Col>
               <Col>
-                <Row className="justify-content-md-center">
+                <Row sm={2} className="justify-content-md-start">
                   <Button
                     type="button"
+                    variant="dark"
                     onClick={() => this.setLocation("roomManager")}
                   >
                     Rooms

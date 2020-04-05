@@ -133,17 +133,25 @@ class EventHistory extends React.Component {
       <>
         <Container>
           <Col>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center pt-4">
               <h1>Event History</h1>
             </Row>
             <Row className="justify-content-md-center">
               <MDBDataTable
                 striped
-                autoWidth
                 small
                 bordered
+                autoWidth
+                responsive
+                entries={8}
+                dark
+                tbodyTextWhite
+                theadTextWhite
+                displayEntries={false}
                 paging={true}
                 data={this.state.dummydata}
+                noBottomColumns
+                sortable
               />
             </Row>
           </Col>

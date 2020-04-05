@@ -6,7 +6,7 @@ class ChatHistory extends React.Component {
     dummydata: {
       columns: [
         {
-          label: "id",
+          label: "ID",
           field: "id",
           sort: "asc",
         },
@@ -32,7 +32,7 @@ class ChatHistory extends React.Component {
         },
         {
           label: "Message",
-          field: "message",
+          field: "messages",
           sort: "asc",
         },
         {
@@ -43,48 +43,48 @@ class ChatHistory extends React.Component {
       ],
       rows: [
         {
-          id: "10",
+          id: 1,
           date: "04/04/2020",
           time: "08:55:40",
           sender: "Kelvin",
           receiver: "all",
-          message: "Hi How are you?",
+          messages: "Hi how are you?",
           room: "general",
         },
         {
-          id: 11,
-          date: "04/04/2020",
-          time: "08:56:00",
-          sender: "Davido",
-          receiver: "all",
-          message: "Fine, Thanks. How are you?",
-          room: "general",
-        },
-        {
-          id: 12,
+          id: 2,
           date: "04/04/2020",
           time: "08:56:40",
-          sender: "Kevin",
+          sender: "David",
           receiver: "all",
-          message: "Im fine",
+          messages: "I'm fine, thanks. How are you?",
           room: "general",
         },
         {
-          id: 13,
+          id: 3,
+          date: "04/04/2020",
+          time: "08:57:40",
+          sender: "Kelvin",
+          receiver: "all",
+          messages: "Same old same old. How do you like the app?",
+          room: "general",
+        },
+        {
+          id: 4,
           date: "04/04/2020",
           time: "08:58:40",
-          sender: "Emma",
+          sender: "David",
           receiver: "all",
-          message: "Hi guys!",
+          messages: "The app is alright.",
           room: "general",
         },
         {
-          id: 14,
+          id: 5,
           date: "04/04/2020",
           time: "08:59:40",
-          sender: "Robin",
+          sender: "Kelvin",
           receiver: "all",
-          message: "welcome",
+          messages: "I agree.",
           room: "general",
         },
       ],
@@ -95,17 +95,24 @@ class ChatHistory extends React.Component {
       <>
         <Container>
           <Col>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center pt-4">
               <h1>Chat History</h1>
             </Row>
             <Row className="justify-content-md-center">
               <MDBDataTable
                 striped
-                autoWidth
                 small
                 bordered
+                autoWidth
+                responsive
+                entries={8}
+                dark
+                tbodyTextWhite
+                theadTextWhite
+                displayEntries={false}
                 paging={true}
                 data={this.state.dummydata}
+                noBottomColumns
               />
             </Row>
           </Col>
