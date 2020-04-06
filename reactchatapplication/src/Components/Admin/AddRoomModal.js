@@ -1,10 +1,37 @@
 import Modal from "react-bootstrap/Modal";
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form, Nav } from "react-bootstrap";
+import Axios from "axios";
 
-const ShowModal = () => {
+const ShowAddModal = () => {
+  let roomName = "";
+  let status = "Active";
+  let addRoom = () => {
+    Axios.post("http://localhost:3001/api/rooms/add-room", {
+      Name: roomName,
+      Status: status,
+    })
+      .then((response) => {
+        console.log(`${response.data} added`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(`OnClick: Status ${status} RoomName ${roomName}`);
+  };
+  let handlePillChange = (value) => {
+    status = value;
+    console.log(`Status ${status} RoomName ${roomName}`);
+  };
+  let handleChange = (event) => {
+    roomName = event.target.value;
+  };
   const [show, toggle] = useState(false);
-  const handleClose = () => toggle(false);
+  const handleNoSaveClose = () => toggle(false);
+  const handleClose = () => {
+    toggle(false);
+    addRoom();
+  };
   const handleShow = () => toggle(true);
   return (
     <>
@@ -12,22 +39,35 @@ const ShowModal = () => {
         Add Room
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal animation={false} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Room</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Room Name:
-          <input></input>
+          <Form.Control
+            required
+            onChange={handleChange}
+            type="text"
+            placeholder="Enter Room Name"
+          />
           <br></br>
           Status:
-          <select>
-            <option>Active</option>
-            <option>Inactive</option>
-          </select>
+          <Nav variant="pills" defaultActiveKey="Active">
+            <Nav.Item>
+              <Nav.Link onSelect={handlePillChange} eventKey="Active">
+                Active
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link onSelect={handlePillChange} eventKey="Inactive">
+                Inactive
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleNoSaveClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
@@ -39,4 +79,4 @@ const ShowModal = () => {
   );
 };
 
-export default ShowModal;
+export default ShowAddModal;

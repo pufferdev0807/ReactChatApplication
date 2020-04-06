@@ -1,13 +1,56 @@
 import React from "react";
 import { MDBDataTable } from "mdbreact";
 import { Col, Row, Container, Button } from "react-bootstrap";
-import ShowModal from "./AddRoomModal";
+import ShowAddModal from "./AddRoomModal";
+import ShowEditModal from "./EditRoomModal";
 
 class RoomManager extends React.Component {
   state = {
     roomName: "",
     dummydata: {
-      columns: [
+
+
+    },
+  };
+
+  render() {
+    return (
+      <>
+        <Container>
+          <Col>
+            <Row className="justify-content-md-center pt-4">
+              <h1>Room Manager</h1>
+            </Row>
+            <Row className="justify-content-md-center">
+              <MDBDataTable
+                btn
+                striped
+                small
+                bordered
+                autoWidth
+                responsive
+                entries={8}
+                dark
+                tbodyTextWhite
+                theadTextWhite
+                displayEntries={false}
+                paging={true}
+                data={this.state.dummydata}
+                noBottomColumns
+              />
+            </Row>
+            <Row className="justify-content-md-center pt-5 flex" sm={6}>
+              <ShowAddModal state={this.state}></ShowAddModal>
+            </Row>
+          </Col>
+        </Container>
+      </>
+    );
+  }
+}
+
+export default RoomManager;
+/*      columns: [
         {
           label: "ID",
           field: "id",
@@ -77,43 +120,4 @@ class RoomManager extends React.Component {
           ),
         },
       ],
-    },
-  };
-
-  render() {
-    return (
-      <>
-        <Container>
-          <Col>
-            <Row className="justify-content-md-center pt-4">
-              <h1>Room Manager</h1>
-            </Row>
-            <Row className="justify-content-md-center">
-              <MDBDataTable
-                btn
-                striped
-                small
-                bordered
-                autoWidth
-                responsive
-                entries={8}
-                dark
-                tbodyTextWhite
-                theadTextWhite
-                displayEntries={false}
-                paging={true}
-                data={this.state.dummydata}
-                noBottomColumns
-              />
-            </Row>
-            <Row className="justify-content-md-center pt-5 flex" sm={6}>
-              <ShowModal state={this.state}></ShowModal>
-            </Row>
-          </Col>
-        </Container>
-      </>
-    );
-  }
-}
-
-export default RoomManager;
+      */

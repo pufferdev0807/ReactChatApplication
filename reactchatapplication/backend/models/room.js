@@ -9,10 +9,11 @@ let Room = new Schema(
     },
     Status: {
       type: String,
+      enum: ["Inactive", "Active"],
       required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = Room;
+module.exports = mongoose.model("room", Room);

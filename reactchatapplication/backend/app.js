@@ -170,6 +170,7 @@ app.use("/api/events", eventRoute);
 app.use("/api/rooms", roomRoute);
 app.use("/api/users", userRoute);
 
-app.use((req, res) => {});
+app.use((req, res, next) => {
+});
 
 server.listen(port, () => `API running @ port ${port}`);

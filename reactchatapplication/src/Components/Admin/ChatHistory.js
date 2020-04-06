@@ -1,10 +1,70 @@
 import React from "react";
 import { MDBDataTable } from "mdbreact";
 import { Col, Row, Container } from "react-bootstrap";
+import Axios from "axios";
 class ChatHistory extends React.Component {
   state = {
-    dummydata: {
-      columns: [
+    columns: [],
+    rows: [],
+  };
+  componentDidMount() {
+    this.retrieveEvents();
+  }
+
+  retrieveEvents = () => {
+    Axios.get("http://localhost:3001/api/chatlog")
+      .then((response) => {
+        let dataColumns = [];
+        console.log(Object.keys(response.data[0]));
+        Object.keys(response.data[0]).map((item) => {
+          let newColumnEntry = {
+            label: item,
+            field: item,
+            sort: "asc",
+          };
+          if (newColumnEntry.label === "by") {
+            newColumnEntry.label = "Sender";
+          }
+          return dataColumns.push(newColumnEntry);
+        });
+        this.setState({ columns: dataColumns, rows: [...response.data] });
+      })
+      .catch((error) => console.log(error));
+  };
+  render() {
+    return (
+      <>
+        <Container>
+          <Col>
+            <Row className="justify-content-md-center pt-4">
+              <h1>Chat History</h1>
+            </Row>
+            <Row className="justify-content-md-center">
+              <MDBDataTable
+                striped
+                small
+                bordered
+                responsive
+                entries={8}
+                dark
+                tbodyTextWhite
+                theadTextWhite
+                displayEntries={false}
+                paging={true}
+                data={this.state}
+                noBottomColumns
+              />
+            </Row>
+          </Col>
+        </Container>
+      </>
+    );
+  }
+}
+
+export default ChatHistory;
+/*
+columns: [
         {
           label: "ID",
           field: "id",
@@ -88,38 +148,4 @@ class ChatHistory extends React.Component {
           room: "general",
         },
       ],
-    },
-  };
-  render() {
-    return (
-      <>
-        <Container>
-          <Col>
-            <Row className="justify-content-md-center pt-4">
-              <h1>Chat History</h1>
-            </Row>
-            <Row className="justify-content-md-center">
-              <MDBDataTable
-                striped
-                small
-                bordered
-                autoWidth
-                responsive
-                entries={8}
-                dark
-                tbodyTextWhite
-                theadTextWhite
-                displayEntries={false}
-                paging={true}
-                data={this.state.dummydata}
-                noBottomColumns
-              />
-            </Row>
-          </Col>
-        </Container>
-      </>
-    );
-  }
-}
-
-export default ChatHistory;
+      */
