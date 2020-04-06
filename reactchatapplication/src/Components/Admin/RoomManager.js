@@ -2,17 +2,38 @@ import React from "react";
 import { MDBDataTable } from "mdbreact";
 import { Col, Row, Container, Button } from "react-bootstrap";
 import ShowAddModal from "./AddRoomModal";
-import ShowEditModal from "./EditRoomModal";
+import Axios from "axios";
 
 class RoomManager extends React.Component {
   state = {
-    roomName: "",
-    dummydata: {
-
-
-    },
+    columns: [],
+    rows: []
   };
-
+  componentDidMount() {
+    this.retrieveEvents();
+  }
+  retrieveEvents = () => {
+    Axios.get("http://localhost:3001/api/rooms")
+      .then((response) => {
+        let dataColumns = [];
+        Object.keys(response.data[0]).map((item) => {
+          let newColumnEntry = {
+            label: item,
+            field: item,
+            sort: "asc",
+          };
+          return dataColumns.push(newColumnEntry);
+        });
+        dataColumns.push({ label: "Action", field: "editField", sort: "asc" })
+        let newRes = []
+        response.data.map(item => {
+          item.editField = (<Button size="sm" variant="light">Edit</Button>)
+          newRes.push(item)
+        })
+        this.setState({ columns: dataColumns, rows: [...newRes] });
+      })
+      .catch((error) => console.log(error));
+  };
   render() {
     return (
       <>
@@ -35,7 +56,7 @@ class RoomManager extends React.Component {
                 theadTextWhite
                 displayEntries={false}
                 paging={true}
-                data={this.state.dummydata}
+                data={this.state}
                 noBottomColumns
               />
             </Row>

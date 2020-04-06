@@ -171,6 +171,13 @@ app.use("/api/rooms", roomRoute);
 app.use("/api/users", userRoute);
 
 app.use((req, res, next) => {
+  if (res.status === 200) res.status = 404
+  next()
 });
+
+app.use((err, req, res, next) => {
+  let error = new Error("Unable to fetch requested data...");
+  res.json(error)
+})
 
 server.listen(port, () => `API running @ port ${port}`);
