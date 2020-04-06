@@ -5,10 +5,16 @@ import Axios from "axios";
 
 class EventHistory extends React.Component {
   state = {
-    dummydata: {
-      columns: [],
-      rows: [],
-    },
+    columns: [],
+    rows: [
+      // {
+      //   type: "JOINEDROOM",
+      //   createdAt: "04/04/2020",
+      //   user: "Kelvin",
+      //   eventid: "2",
+      //   ppid: "10002",
+      // },
+    ],
   };
   componentDidMount() {
     this.retrieveEvents();
@@ -18,12 +24,15 @@ class EventHistory extends React.Component {
     Axios.get("http://localhost:3001/api/events")
       .then((response) => {
         let dataColumns = [];
-        Object.keys(response.data[0]).map((item) => {
-          return dataColumns.push(item);
+        Object.keys(response.data[3]).map((item) => {
+          let newColumnEntry = {
+            label: item,
+            field: item,
+            sort: "asc",
+          };
+          return dataColumns.push(newColumnEntry);
         });
-        console.log(dataColumns);
-        this.setState({ dummydata: { columns: dataColumns } });
-        console.log(this.state.dummydata.columns);
+        this.setState({ columns: dataColumns, rows: [...response.data] });
       })
       .catch((error) => console.log(error));
   };
@@ -40,7 +49,6 @@ class EventHistory extends React.Component {
                 striped
                 small
                 bordered
-                autoWidth
                 responsive
                 entries={8}
                 dark
@@ -48,7 +56,7 @@ class EventHistory extends React.Component {
                 theadTextWhite
                 displayEntries={false}
                 paging={true}
-                data={this.state.dummydata}
+                data={this.state}
                 noBottomColumns
                 sortable
               />

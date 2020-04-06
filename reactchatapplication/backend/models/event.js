@@ -8,7 +8,7 @@ let Event = new Schema(
       enum: ["CONNECTION", "JOINED", "ERROR", "DISCONNECT"],
       required: true,
     },
-    User: {
+    user: {
       type: String,
     },
     PPID: {

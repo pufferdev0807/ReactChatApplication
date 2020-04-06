@@ -41,16 +41,20 @@ export default class Landing extends React.Component {
         level: "warning",
       });
     } else {
-      this.setState({
-        navLocation: "NameSet",
-        userList: [...this.state.userList, this.state.name],
-      });
-      let message = {
-        room: this.state.selectedRoom,
-        name: this.state.name,
-      };
-      console.log(`user ${message.name} is joining ${message.room}`);
-      socket.emit("usersListUpdate", message);
+      this.setState(
+        {
+          navLocation: "NameSet",
+          userList: [...this.state.userList, this.state.name],
+        },
+        () => {
+          let message = {
+            room: this.state.selectedRoom,
+            name: this.state.name,
+          };
+          console.log(`user ${message.name} is joining ${message.room}`);
+          socket.emit("usersListUpdate", message);
+        }
+      );
     }
   };
 

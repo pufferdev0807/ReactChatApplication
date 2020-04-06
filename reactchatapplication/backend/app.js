@@ -170,25 +170,6 @@ app.use("/api/events", eventRoute);
 app.use("/api/rooms", roomRoute);
 app.use("/api/users", userRoute);
 
-app.use((req, res) => {
-  if (res.status !== 200) {
-    const err = new Error(`Not Found - ${req.originalUrl}`);
-    eventHistoryModel.create(
-      {
-        type: "ERROR",
-        PPID: Math.random()
-          .toString(36)
-          .replace(/[^a-z]+/g, "")
-          .substr(0, 5),
-      },
-      (err, doc) => {
-        if (err)
-          console.log(
-            "Internal server error: I don`t even know what to do anymore"
-          );
-      }
-    );
-  }
-});
+app.use((req, res) => {});
 
 server.listen(port, () => `API running @ port ${port}`);
