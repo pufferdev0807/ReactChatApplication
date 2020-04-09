@@ -372,3 +372,13 @@
 ::1 - - [06/Apr/2020:23:11:52 +0000] "POST /api/rooms/add-room HTTP/1.1" 200 155
 ::1 - - [06/Apr/2020:23:11:55 +0000] "GET /api/chatlog HTTP/1.1" 304 -
 ::1 - - [06/Apr/2020:23:11:55 +0000] "GET /api/rooms HTTP/1.1" 200 342
+::1 - - [09/Apr/2020:00:04:32 +0000] "GET /api/events HTTP/1.1" 200 40531
+::1 - - [09/Apr/2020:00:04:32 +0000] "GET /api/chatlog HTTP/1.1" 200 987
+::1 - - [09/Apr/2020:00:04:33 +0000] "GET /api/rooms HTTP/1.1" 200 342
+::1 - - [09/Apr/2020:00:05:00 +0000] "GET /api/chatlog HTTP/1.1" 304 -
+::1 - - [09/Apr/2020:00:05:00 +0000] "GET /api/rooms HTTP/1.1" 304 -
+::1 - - [09/Apr/2020:00:05:01 +0000] "GET /api/events HTTP/1.1" 304 -
+::1 - - [09/Apr/2020:00:05:02 +0000] "GET /api/rooms HTTP/1.1" 304 -
+::1 - - [09/Apr/2020:00:05:03 +0000] "GET /api/chatlog HTTP/1.1" 304 -
+::1 - - [09/Apr/2020:00:05:03 +0000] "GET /api/events HTTP/1.1" 304 -
+::1 - - [09/Apr/2020:00:05:07 +0000] "GET /api/rooms HTTP/1.1" 304 -
