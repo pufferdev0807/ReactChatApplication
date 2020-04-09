@@ -84,7 +84,7 @@ export default class Landing extends React.Component {
   onEnterKey = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      this.handleClick();
+      this.addNotification();
     }
   };
   setLocLogin = () => {
