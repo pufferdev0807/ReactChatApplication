@@ -29,7 +29,6 @@ class MessageComposer extends React.Component {
       };
       socket.emit("message", message);
     }
-
     this.setState({ msg: '' });
   };
 
