@@ -11,11 +11,14 @@ class MessageComposer extends React.Component {
       room: this.props.room,
       msg: "",
     };
-    this.handleFields = this.handleFields.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleFields = e => this.setState({ [e.target.name]: e.target.value });
+  handleChange = (event) => {
+    this.setState({ msg: event.target.value });
+  };
 
+  handleSubmit = () => { };
 
   sendMessage = () => {
     // substitute time for something more meaningful
@@ -43,15 +46,13 @@ class MessageComposer extends React.Component {
       <InputGroup className="composeArea">
         <Form.Control
           size="lg"
-          name="msg"
           className="composeField"
           onKeyDown={this.onEnterKey}
-          onChange={this.handleFields}
-          value={this.state.msg}
+          onChange={this.handleChange}
           type="text"
           placeholder="Type here..."
         />
-        <Button type="submit" variant="dark" onClick={this.sendMessage}>
+        <Button variant="dark" onClick={this.sendMessage}>
           Send
         </Button>
       </InputGroup>

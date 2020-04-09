@@ -5,7 +5,15 @@ export default class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chatRoomList: []
+      chatRoomList: [
+        "general",
+        "gaming",
+        "nsfw",
+        "politics",
+        "anime",
+        "startrek",
+        "chinaflu",
+      ]
     };
   }
   componentDidMount() {

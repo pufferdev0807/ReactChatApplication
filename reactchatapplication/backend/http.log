@@ -453,6 +453,7 @@
 ::1 - - [09/Apr/2020:06:26:20 +0000] "GET /api/rooms HTTP/1.1" 304 -
 ::1 - - [09/Apr/2020:06:26:24 +0000] "GET /api/rooms HTTP/1.1" 304 -
 ::1 - - [09/Apr/2020:06:26:48 +0000] "GET /api/rooms HTTP/1.1" 304 -
+<<<<<<< HEAD
 ::ffff:127.0.0.1 - - [09/Apr/2020:16:57:54 +0000] "GET /api/rooms HTTP/1.1" 200 342
 ::1 - - [09/Apr/2020:17:14:16 +0000] "GET /api/rooms HTTP/1.1" 304 -
 ::1 - - [09/Apr/2020:17:14:36 +0000] "GET /api/rooms HTTP/1.1" 304 -
@@ -3668,3 +3669,7 @@
 ::ffff:127.0.0.1 - - [09/Apr/2020:19:03:33 +0000] "GET /api/rooms HTTP/1.1" 304 -
 ::1 - - [09/Apr/2020:19:06:06 +0000] "GET /api/rooms HTTP/1.1" 304 -
 ::ffff:127.0.0.1 - - [09/Apr/2020:19:06:06 +0000] "GET /api/rooms HTTP/1.1" 304 -
+=======
+>>>>>>> parent of b14a048... fields now clear after message sent
+::ffff:127.0.0.1 - - [09/Apr/2020:19:12:31 +0000] "GET /api/rooms HTTP/1.1" 304 -
+::1 - - [09/Apr/2020:19:12:31 +0000] "GET /api/rooms HTTP/1.1" 304 -

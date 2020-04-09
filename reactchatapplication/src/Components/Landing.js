@@ -21,7 +21,8 @@ export default class Landing extends React.Component {
   telling them to enter username/select a room
   */
   notificationSystem = React.createRef();
-  addNotification = () => {
+  addNotification = (event) => {
+    event.preventDefault();
     const notification = this.notificationSystem.current;
     if (this.state.name === undefined || this.state.name === "") {
       console.log("Name must be set.");
@@ -83,7 +84,7 @@ export default class Landing extends React.Component {
   onEnterKey = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      this.addNotification();
+      this.handleClick();
     }
   };
   setLocLogin = () => {
