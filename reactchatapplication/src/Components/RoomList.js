@@ -1,13 +1,39 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-
+import Axios from "axios";
 export default class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chatRoomList: [...this.props.chatRoomList]
+      chatRoomList: [
+        "general",
+        "gaming",
+        "nsfw",
+        "politics",
+        "anime",
+        "startrek",
+        "chinaflu",
+      ]
     };
   }
+  componentDidMount() {
+    this.retrieveRoomList();
+  }
+
+  retrieveRoomList = () => {
+    Axios.get("http://localhost:3001/api/rooms")
+      .then((response) => {
+        let rooms = [...this.state.chatRoomList];
+        (response.data).map(val => {
+          return rooms.push(val.Name);
+        })
+        this.setState({ chatRoomList: rooms })
+        console.log(this.state.chatRoomList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   setRoom = event => {
     this.props.onRoomSelect(event.target.value);
