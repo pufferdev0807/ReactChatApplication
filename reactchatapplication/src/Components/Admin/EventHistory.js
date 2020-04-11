@@ -13,7 +13,7 @@ class EventHistory extends React.Component {
   }
 
   retrieveEvents = () => {
-    Axios.get("http://localhost:3001/api/events")
+    Axios.get("http://18.224.228.195:3001/api/events")
       .then((response) => {
         let dataColumns = [];
         Object.keys(response.data[3]).map((item) => {

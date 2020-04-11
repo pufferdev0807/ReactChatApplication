@@ -14,7 +14,7 @@ class RoomManager extends React.Component {
     this.retrieveEvents();
   }
   retrieveEvents = () => {
-    Axios.get("http://localhost:3001/api/rooms")
+    Axios.get("http://18.224.228.195:3001/api/rooms")
       .then((response) => {
         let dataColumns = [];
         Object.keys(response.data[0]).map((item) => {
@@ -41,7 +41,8 @@ class RoomManager extends React.Component {
       .catch((error) => console.log(error));
   };
   handleClick = (data) => {
-    return <ShowEditModal show state={this.state}></ShowEditModal>;
+    console.log("edit button clicked")
+    return <ShowEditModal selectedRoom={data} open={true}></ShowEditModal>;
   }
   render() {
     return (

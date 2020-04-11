@@ -160,7 +160,7 @@ const eventRoute = require("./routes/events");
 const roomRoute = require("./routes/rooms");
 const userRoute = require("./routes/users");
 
-app.use(express.static(path.resolve(__dirname, "../build")));
+
 app.use(cors());
 app.use(morgan("common", { stream: writeStream }));
 app.use(helmet());

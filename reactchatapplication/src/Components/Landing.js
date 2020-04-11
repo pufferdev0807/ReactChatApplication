@@ -113,9 +113,9 @@ export default class Landing extends React.Component {
                   type="text"
                   placeholder="Enter Username"
                 />
-                <button onClick={this.addNotification} variant="dark">
+                <Button onClick={this.addNotification} variant="dark">
                   Enter Room!
-                </button>
+                </Button>
                 <NotificationSystem ref={this.notificationSystem} />
               </InputGroup>
             </Row>

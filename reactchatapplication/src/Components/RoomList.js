@@ -13,14 +13,13 @@ export default class ChatRoom extends React.Component {
   }
 
   retrieveRoomList = () => {
-    Axios.get("http://localhost:3001/api/rooms")
+    Axios.get("http://18.224.228.195:3001/api/rooms")
       .then((response) => {
         let rooms = [...this.state.chatRoomList];
         (response.data).map(val => {
           return rooms.push(val.Name);
         })
         this.setState({ chatRoomList: rooms })
-        console.log(this.state.chatRoomList);
       })
       .catch((error) => {
         console.log(error);
