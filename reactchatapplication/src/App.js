@@ -8,7 +8,7 @@ let socket;
 
 class App extends React.Component {
   componentDidMount() {
-    socket = socketIOClient("http://18.224.228.195:3001"); // Used for Testing
+    socket = socketIOClient("http://ec2-18-224-228-195.us-east-2.compute.amazonaws.com:3001"); // Used for Testing
   }
   render() {
     return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from "react-bootstrap/Modal";
 import { Button, Form, Nav } from "react-bootstrap";
-import Axios from "axios";
 
 class EditRoomModal extends React.Component {
   constructor(props) {

@@ -7,7 +7,7 @@ const ShowAddModal = () => {
   let roomName = "";
   let stat = "Active";
   let addRoom = () => {
-    Axios.post("http://18.224.228.195:3001/api/rooms/add-room", {
+    Axios.post("http://ec2-18-224-228-195.us-east-2.compute.amazonaws.com:3001/api/rooms/add-room", {
       Name: roomName,
       Status: stat,
     })
