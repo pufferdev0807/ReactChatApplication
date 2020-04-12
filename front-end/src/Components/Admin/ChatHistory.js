@@ -15,7 +15,6 @@ class ChatHistory extends React.Component {
     Axios.get("http://localhost:3001/api/chatlog")
       .then((response) => {
         let dataColumns = [];
-        console.log(Object.keys(response.data[0]));
         Object.keys(response.data[0]).map((item) => {
           let newColumnEntry = {
             label: item,

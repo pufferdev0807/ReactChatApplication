@@ -5,11 +5,11 @@ import Axios from "axios";
 
 const ShowAddModal = () => {
   let roomName = "";
-  let status = "Active";
+  let stat = "Active";
   let addRoom = () => {
     Axios.post("http://localhost:3001/api/rooms/add-room", {
       Name: roomName,
-      Status: status,
+      Status: stat,
     })
       .then((response) => {
         console.log(`${response.data} added`);
@@ -17,22 +17,22 @@ const ShowAddModal = () => {
       .catch((error) => {
         console.log(error);
       });
-    console.log(`OnClick: Status ${status} RoomName ${roomName}`);
+    console.log(`OnClick: Status ${stat} RoomName ${roomName}`);
   };
   let handlePillChange = (value) => {
-    status = value;
-    console.log(`Status ${status} RoomName ${roomName}`);
+    stat = value;
+    console.log(`Status ${stat} RoomName ${roomName}`);
   };
   let handleChange = (event) => {
     roomName = event.target.value;
   };
-  const [show, toggle] = useState(false);
-  const handleNoSaveClose = () => toggle(false);
+  const [show, setShow] = useState(false);
+  const handleNoSaveClose = () => setShow(false);
   const handleClose = () => {
-    toggle(false);
+    setShow(false);
     addRoom();
   };
-  const handleShow = () => toggle(true);
+  const handleShow = () => setShow(true);
   return (
     <>
       <Button variant="dark" onClick={handleShow}>

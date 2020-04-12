@@ -1,3 +1,4 @@
+let mongoose = require("mongoose")
 const express = require("express");
 const server = express.Router();
 
@@ -28,7 +29,8 @@ server.route("/add-room").post((req, res, next) => {
 });
 
 server.route("/edit-room").patch((req, res, next) => {
-  roomModel.findOneAndUpdate({}, (err, doc) => {
+  id = mongoose.Types.ObjectId(req.body._id)
+  roomModel.findByIdAndUpdate(id, req.body, { new: true }, (err, doc) => {
     if (err) print(err)
     else res.json(doc)
   })

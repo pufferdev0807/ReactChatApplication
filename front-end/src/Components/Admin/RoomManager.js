@@ -9,6 +9,8 @@ class RoomManager extends React.Component {
   state = {
     columns: [],
     rows: [],
+    show: false,
+    objData: undefined
   };
   componentDidMount() {
     this.retrieveEvents();
@@ -40,8 +42,11 @@ class RoomManager extends React.Component {
       })
       .catch((error) => console.log(error));
   };
+  handleNoSaveClose = () => this.setState({ show: false });
+  handleClose = () => this.setState({ show: false });
+  handleShow = () => this.setState({ show: false });
   handleClick = (data) => {
-    return <ShowEditModal show state={this.state}></ShowEditModal>;
+    this.setState({ show: true, objData: data })
   }
   render() {
     return (
@@ -71,6 +76,12 @@ class RoomManager extends React.Component {
             </Row>
             <Row className="justify-content-md-center pt-5 flex" sm={6}>
               <ShowAddModal state={this.state}></ShowAddModal>
+              <ShowEditModal
+                handleNoSaveClose={this.handleNoSaveClose}
+                handleShow={this.handleShow}
+                handleClose={this.handleClose}
+                show={this.state.show}
+                data={this.state.objData}></ShowEditModal>
             </Row>
           </Col>
         </Container>
