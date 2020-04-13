@@ -42,7 +42,7 @@ admin/password
 
 ## Technologies
 
-React Notification System by Igor Prado https://github.com/igorprado/react-notification-system
-Moment.js
-Material Design for Bootstrap
-React Bootstrap
+- React Notification System by Igor Prado https://github.com/igorprado/react-notification-system
+- Moment.js
+- Material Design for Bootstrap
+- React Bootstrap
