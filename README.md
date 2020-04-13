@@ -8,25 +8,25 @@
 
 ## Admin Credentials
 
-admin/admin
+admin/password
 
 ## Frontend
 
-- [ ] Base frontend chat app W/ Socket.io
+- [x] Base frontend chat app W/ Socket.io
 - [x] React-Material for UI
-- [ ] Guest
+- [x] Guest
   - [x] Chat Screen
-  - [ ] Admin Login Screen [JWT, or PASSPORT.JS]
-- [ ] Admin
+  - [x] Admin Login Screen
+- [x] Admin
   - [x] Event History : Event Type(CONNECTED, JOINED, ERROR), Date, Time, User, EventID, PPID
   - [x] Chat History(Pagination, Sorting, Filter) : MessageID, Date, Time, MessageSender, MessageReceiver, Message, Room
   - [x] Rooms(Pagination, Sorting, Filter) : RoomID, Room Name, Created Date, Edit Date, Status, Add New Room
-  - [ ] Add/Edit Room Screen(Basic validation, no nameless room) : RoomName, Status(Active, Inactive)
+  - [x] Add/Edit Room Screen(Basic validation, no nameless room) : RoomName, Status(Active, Inactive)
 
 ## Backend
 
-- [ ] Base backend
-  - [ ] Socket.io
+- [x] Base backend
+  - [x] Socket.io
   - [x] Database API
 - [x] Database - MongoDB Remote
 - [x] Admin User table
