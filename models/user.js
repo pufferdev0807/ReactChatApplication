@@ -5,6 +5,7 @@ let User = new Schema(
   {
     Username: {
       type: String,
+      unique: true,
       required: true,
     },
     Password: {
@@ -15,4 +16,4 @@ let User = new Schema(
   { timestamps: true }
 );
 
-module.exports = User;
+module.exports = mongoose.model("user", User);

@@ -12,16 +12,12 @@ const ShowAddModal = () => {
       Status: stat,
     })
       .then((response) => {
-        console.log(`${response.data} added`);
       })
       .catch((error) => {
-        console.log(error);
       });
-    console.log(`OnClick: Status ${stat} RoomName ${roomName}`);
   };
   let handlePillChange = (value) => {
     stat = value;
-    console.log(`Status ${stat} RoomName ${roomName}`);
   };
   let handleChange = (event) => {
     roomName = event.target.value;

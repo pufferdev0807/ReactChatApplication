@@ -26,7 +26,7 @@ class EventHistory extends React.Component {
         });
         this.setState({ columns: dataColumns, rows: [...response.data] });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => { });
   };
   render() {
     return (

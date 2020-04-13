@@ -25,7 +25,6 @@ export default class Landing extends React.Component {
     event.preventDefault();
     const notification = this.notificationSystem.current;
     if (this.state.name === undefined || this.state.name === "") {
-      console.log("Name must be set.");
       notification.addNotification({
         message: "Please enter a username.", //message to be displayed
         level: "warning", //type of notification (success, error, warning, info)
@@ -34,7 +33,6 @@ export default class Landing extends React.Component {
       this.state.selectedRoom === undefined ||
       this.state.selectedRoom === ""
     ) {
-      console.log("Room must be set.");
       notification.addNotification({
         message: "Please select a room to join.",
         level: "warning",
@@ -50,7 +48,6 @@ export default class Landing extends React.Component {
             room: this.state.selectedRoom,
             name: this.state.name,
           };
-          console.log(`user ${message.name} is joining ${message.room}`);
           socket.emit("usersListUpdate", message);
         }
       );
@@ -136,7 +133,6 @@ export default class Landing extends React.Component {
         </Container>
       );
     } else if (this.state.navLocation === "NameSet") {
-      console.log(this.state.navLocation);
       return (
         <Room
           name={this.state.name}

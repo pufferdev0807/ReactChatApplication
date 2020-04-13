@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  FormControl,
-  FormGroup,
   Form,
   Col,
   Button,
@@ -9,21 +7,41 @@ import {
   Row,
 } from "react-bootstrap";
 import AdminLanding from "./AdminLanding";
+import Axios from "axios";
 
 class Login extends React.Component {
-  state = {
-    username: "",
-    password: "",
-    authenticated: false,
-    navLocation: "",
-  };
+  constructor() {
+    super();
+    this.state = {
+      username: "",
+      password: "",
+      navLocation: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
+    if (this.state.username !== "" && this.state.password !== "") {
+      Axios.post('http://localhost:3001/api/users/login', {
+        Username: this.state.username,
+        Password: this.state.password
+      })
+        .then((response) => {
+          if (response.data.msg === "Invalid Credentials!") {
+          }
+          else {
+            this.setState({ navLocation: "loggedIn" });
+          }
+        })
+        .catch((error) => {
+        })
+    }
   };
 
-  setLocLogin = () => {
-    this.setState({ navLocation: "loggedIn" });
-  };
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  }
 
   whichToRender = () => {
     if (this.state.navLocation === "") {
@@ -34,16 +52,16 @@ class Login extends React.Component {
               <h1>Admin Login</h1>
             </Row>
             <Row className="justify-content-md-center">
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
+              <Form>
+                <Form.Group>
                   Username:
-                  <FormControl placeholder="Username" />
-                </FormGroup>
-                <FormGroup>
+                  <Form.Control onChange={this.handleChange} id="username" type="text" placeholder="Username" />
+                </Form.Group>
+                <Form.Group>
                   Password:
-                  <FormControl placeholder="Password" />
-                </FormGroup>
-                <Button onClick={this.setLocLogin} variant="dark" type="submit">
+                  <Form.Control onChange={this.handleChange} id="password" type="password" placeholder="Password" />
+                </Form.Group>
+                <Button onClick={this.handleSubmit} variant="dark" type="submit">
                   Login
                 </Button>
               </Form>

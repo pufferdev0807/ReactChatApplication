@@ -14,7 +14,6 @@ const ShowEditModal = (props) => {
     roomName = data.n;
     roomid = data.i;
     stat = data.s;
-    console.log(`Status ${stat} RoomName ${roomName} RoomID: ${roomid}`);
   }
 
   let editRoom = () => {
@@ -23,9 +22,9 @@ const ShowEditModal = (props) => {
       _id: roomid,
       Status: stat
     }).then((response) => {
-      console.log(`${response.data} has been edited successfully`);
+      //edit successful
     }).catch((error) => {
-      console.log(`${error}`);
+      //error
     })
   };
 

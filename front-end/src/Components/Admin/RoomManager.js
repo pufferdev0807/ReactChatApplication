@@ -40,7 +40,7 @@ class RoomManager extends React.Component {
         })
         this.setState({ columns: dataColumns, rows: [...newRes] });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => { });
   };
   handleNoSaveClose = () => this.setState({ show: false });
   handleClose = () => this.setState({ show: false });

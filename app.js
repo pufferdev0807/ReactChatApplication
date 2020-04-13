@@ -26,7 +26,7 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     if (err) throw err;
-    else console.log("Successfully connected to remote DB");
+    else { }
   }
 );
 
@@ -52,10 +52,7 @@ io.on("connection", (socket) => {
         .substr(0, 5),
     },
     (err, doc) => {
-      if (err)
-        console.log(
-          "Internal server error: I don`t even know what to do anymore"
-        );
+      if (err) { }
     }
   );
 
@@ -63,7 +60,6 @@ io.on("connection", (socket) => {
     room = data.room;
     msg = data.msg;
     by = data.by;
-    //console.log(data);
     chatHistoryModel.create(
       {
         msg,
@@ -72,7 +68,6 @@ io.on("connection", (socket) => {
       },
       (err, doc) => {
         if (err) {
-          console.log(`System error when saving message: ${err}`);
           eventHistoryModel.create(
             {
               type: "ERROR",
@@ -83,10 +78,7 @@ io.on("connection", (socket) => {
                 .substr(0, 5),
             },
             (err, doc) => {
-              if (err)
-                console.log(
-                  "Internal server error: I don`t even know what to do anymore"
-                );
+              if (err) { }
             }
           );
         }
@@ -108,21 +100,15 @@ io.on("connection", (socket) => {
           .substr(0, 5),
       },
       (err, doc) => {
-        if (err)
-          console.log(
-            "Internal server error: I don`t even know what to do anymore"
-          );
+        if (err) { }
       }
     );
     userList[room] = [...userList[room], data.name];
-    console.log(`Users in ${room} : ${userList[room]}`);
     io.to(`${room}`).emit("updateList", userList[data.room]);
   });
 
   socket.on("user-disconnect", (data) => {
-    //console.log(`receiving emit ${data.name} disconnect from ${data.room}`);
     if (typeof data.room !== "undefined" || typeof data.name !== "undefined") {
-      //console.log(`${data.name} has left ${data.room}`);
       room = data.room;
       socket.leave(room);
       eventHistoryModel.create(
@@ -135,16 +121,10 @@ io.on("connection", (socket) => {
             .substr(0, 5),
         },
         (err, doc) => {
-          if (err)
-            console.log(
-              "Internal server error: I don`t even know what to do anymore"
-            );
+          if (err) { }
         }
       );
-      // console.log(userList);
       userList[room] = userList[room].filter((usr) => usr !== data.name);
-      console.log(`${data.name} has left ${room}`);
-      console.log(`Users in ${room} : ${userList[room]}`);
       io.to(`${room}`).emit("updateList", userList[room]);
     } else {
     }

@@ -20,10 +20,8 @@ export default class ChatRoom extends React.Component {
           return rooms.push(val.Name);
         })
         this.setState({ chatRoomList: rooms })
-        console.log(this.state.chatRoomList);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 

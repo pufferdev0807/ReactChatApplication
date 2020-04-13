@@ -11,7 +11,6 @@ export default class ChatRoom extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("Updated");
     socket.on("updateList", (data) => {
       this.setState({ userList: [...data] });
       this.setState({ userCount: this.state.userList.length });

@@ -22,9 +22,7 @@ class AdminLanding extends React.Component {
   };
 
   setLocation(value) {
-    console.log(`setting location to ${value}`);
     this.setState({ location: value });
-    console.log(`location set to ${this.state.location}`);
   }
   render() {
     return (

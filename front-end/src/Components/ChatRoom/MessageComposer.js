@@ -43,6 +43,7 @@ class MessageComposer extends React.Component {
     return (
       <InputGroup className="composeArea">
         <Form.Control
+          as="textarea"
           size="lg"
           name="msg"
           value={this.state.msg}
