@@ -12,7 +12,7 @@ admin/password
 
 ## Instructions
 Application deployed at:
-- (AWS)[http://ec2-18-224-228-195.us-east-2.compute.amazonaws.com/]
+- [AWS](http://ec2-18-224-228-195.us-east-2.compute.amazonaws.com/)
 
 ## Frontend
 
