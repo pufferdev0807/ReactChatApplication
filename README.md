@@ -46,16 +46,16 @@ Application deployed at:
 
 ## Technologies
 
-- (react-notification-system)[https://github.com/igorprado/react-notification-system]
-- (moment.js)[https://github.com/moment/moment]
-- (Material Design for Bootstrap)[https://github.com/mdbootstrap/React-Bootstrap-with-Material-Design]
-- (React Bootstrap)[https://github.com/react-bootstrap/react-bootstrap]
-- (bcryptjs)[https://github.com/dcodeIO/bcrypt.js]
-- (axios)[https://github.com/axios/axios]
-- (socket.io)[https://github.com/socketio/socket.io]
-- (socket.io-client)[https://github.com/socketio/socket.io-client]
-- (express)[https://github.com/expressjs/express]
-- (mongoose)[https://github.com/Automattic/mongoose]
-- (body-parser)[https://github.com/expressjs/body-parser]
-- (morgan)[https://github.com/expressjs/morgan]
-- (helmet)[https://github.com/helmetjs/helmet]
+- [react-notification-system](https://github.com/igorprado/react-notification-system)
+- [moment.js](https://github.com/moment/moment)
+- [Material Design for Bootstrap](https://github.com/mdbootstrap/React-Bootstrap-with-Material-Design)
+- [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js)
+- [axios](https://github.com/axios/axios)
+- [socket.io](https://github.com/socketio/socket.io)
+- [socket.io-client](https://github.com/socketio/socket.io-client)
+- [express](https://github.com/expressjs/express)
+- [mongoose](https://github.com/Automattic/mongoose)
+- [body-parser](https://github.com/expressjs/body-parser)
+- [morgan](https://github.com/expressjs/morgan)
+- [helmet](https://github.com/helmetjs/helmet)
