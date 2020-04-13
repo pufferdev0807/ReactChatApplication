@@ -3,24 +3,8 @@ const bcrypt = require("bcryptjs");
 const server = express.Router();
 
 let userModel = require("../models/user");
-server.route("/register").post((req, res, next) => {
-    bcrypt.genSalt(10, (err, salt) => {
-        if (err) next(err);
-        else bcrypt.hash(req.body.Password, salt, (err, hash) => {
-            if (err) next(err);
-            else userModel.create({ Username: req.body.Username, Password: hash }, (err, doc) => {
-                if (err) next(err);
-                else res.json(doc);
-            })
-        })
-    })
-});
-
 server.route("/login").post((req, res, next) => {
-    //console.log(`${req.body.Password} ${req.body.Username}`);
     userModel.findOne({ Username: req.body.Username }, (err, doc) => {
-        //console.log(`${doc}`);
-        // console.log(`${doc}`);
         if (err) next(err);
         else {
             if (doc !== null)
@@ -35,10 +19,17 @@ server.route("/login").post((req, res, next) => {
         }
     })
 })
-
-
+// Registration Route Disabled/Not In Use
+// server.route("/register").post((req, res, next) => {
+//     bcrypt.genSalt(10, (err, salt) => {
+//         if (err) next(err);
+//         else bcrypt.hash(req.body.Password, salt, (err, hash) => {
+//             if (err) next(err);
+//             else userModel.create({ Username: req.body.Username, Password: hash }, (err, doc) => {
+//                 if (err) next(err);
+//                 else res.json(doc);
+//             })
+//         })
+//     })
+// });
 module.exports = server;
-// userModel.find({ Username: req.body.Username, Password: req.body.Password }, (err, doc) => {
-//     if (err) next(err);
-//     else res.json(doc);
-// })
