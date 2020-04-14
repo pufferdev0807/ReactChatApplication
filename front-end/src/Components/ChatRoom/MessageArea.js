@@ -22,7 +22,7 @@ class MessageArea extends React.Component {
   render() {
     return (
       <>
-        <div id="messageArea">
+        <div>
           {`Welcome to ${this.props.room} chatroom!`}<br />
           {`All messages are being logged.`}
           <br /><br />
