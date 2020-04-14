@@ -19,7 +19,7 @@ export default class App extends React.Component {
       <Container fluid className="fill">
         <h1 className="justify-content-center backgroundGray display-4 pb-3">{this.state.room}</h1>
         <Row>
-          <Col className="messageWindow" md={10} sm={12}>
+          <Col id="messageArea" className="messageWindow" md={10} sm={12}>
             <MessageArea room={this.state.room} alltext={this.state.alltext} />
           </Col>
           <Col className="d-none d-sm-block">
