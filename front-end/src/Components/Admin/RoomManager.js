@@ -92,7 +92,6 @@ class RoomManager extends React.Component {
             </Row>
             <Row className="justify-content-md-center pt-5 flex" sm={6}>
               <Button onClick={this.handleClickAdd} variant="light">Add Room</Button>
-              <Button onClick={this.deleteRooms}>Clear Rooms</Button>
               <ShowAddModal
                 retrieve={this.retrieveRooms}
                 handleNoSaveCloseAdd={this.handleNoSaveCloseAdd}
