@@ -44,13 +44,6 @@ class RoomManager extends React.Component {
       })
       .catch((error) => { });
   };
-  deleteRooms = () => {
-    Axios.delete("http://localhost:3001/api/rooms/delete-all", {}).then((response) => {
-      console.log(response);
-    }).catch((error) => {
-
-    })
-  }
   handleNoSaveClose = () => {
     this.setState({ show: false })
     this.retrieveRooms();
@@ -105,7 +98,7 @@ class RoomManager extends React.Component {
                 handleNoSaveCloseAdd={this.handleNoSaveCloseAdd}
                 handleShowAdd={this.handleShowAdd}
                 handleCloseAdd={this.handleCloseAdd}
-                showAdd={this.state.showAdd}></ShowAddModal>
+                show={this.state.showAdd}></ShowAddModal>
               <ShowEditModal
                 retrieve={this.retrieveRooms}
                 handleNoSaveClose={this.handleNoSaveClose}

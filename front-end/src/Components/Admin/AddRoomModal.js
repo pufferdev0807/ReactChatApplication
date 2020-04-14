@@ -4,7 +4,7 @@ import { Button, Form, Nav } from "react-bootstrap";
 import Axios from "axios";
 
 const ShowAddModal = (props) => {
-  let show = props.showAdd;
+  let show = props.show;
   let retrieve = props.retrieve;
   let handleClose = props.handleClose;
   let handleNoSaveCloseAdd = props.handleNoSaveCloseAdd;
