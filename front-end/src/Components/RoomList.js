@@ -17,7 +17,12 @@ export default class ChatRoom extends React.Component {
       .then((response) => {
         let rooms = [...this.state.chatRoomList];
         (response.data).map(val => {
-          return rooms.push(val.Name);
+          if (val.Status === "Active") {
+            return rooms.push(val.Name);
+          }
+          else {
+            return [];
+          }
         })
         this.setState({ chatRoomList: rooms })
       })
@@ -33,13 +38,13 @@ export default class ChatRoom extends React.Component {
     return (
       <div>
         <ListGroup className="roomList">
-          <ListGroup.Item disabled>
+          <ListGroup.Item bsPrefix>
             <b>Room List</b>
           </ListGroup.Item>
           {this.state.chatRoomList.map((val, ctr) => {
             return (
               <React.Fragment key={ctr}>
-                <ListGroup.Item action onClick={this.setRoom} value={val}>
+                <ListGroup.Item bsPrefix action className="roomListEntry" onClick={this.setRoom} value={val}>
                   {val}
                 </ListGroup.Item>
               </React.Fragment>

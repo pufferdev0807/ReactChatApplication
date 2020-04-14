@@ -10,12 +10,13 @@ class RoomManager extends React.Component {
     columns: [],
     rows: [],
     show: false,
+    showAdd: false,
     objData: undefined
   };
   componentDidMount() {
-    this.retrieveEvents();
+    this.retrieveRooms();
   }
-  retrieveEvents = () => {
+  retrieveRooms = () => {
     Axios.get("http://localhost:3001/api/rooms")
       .then((response) => {
         let dataColumns = [];
@@ -24,6 +25,7 @@ class RoomManager extends React.Component {
             label: item,
             field: item,
             sort: "asc",
+            width: 150
           };
           return dataColumns.push(newColumnEntry);
         });
@@ -35,18 +37,43 @@ class RoomManager extends React.Component {
             s: item.Status,
             i: item._id
           }
-          item.editField = <Button onClick={() => this.handleClick(newObj)} size="sm" variant="light">Edit</Button>
+          item.editField = <Button onClick={() => this.handleClickEdit(newObj)} size="sm" variant="light">Edit</Button>
           return newRes.push(item)
         })
         this.setState({ columns: dataColumns, rows: [...newRes] });
       })
       .catch((error) => { });
   };
-  handleNoSaveClose = () => this.setState({ show: false });
-  handleClose = () => this.setState({ show: false });
+  deleteRooms = () => {
+    Axios.delete("http://localhost:3001/api/rooms/delete-all", {}).then((response) => {
+      console.log(response);
+    }).catch((error) => {
+
+    })
+  }
+  handleNoSaveClose = () => {
+    this.setState({ show: false })
+    this.retrieveRooms();
+  };
+  handleNoSaveCloseAdd = () => {
+    this.setState({ showAdd: false });
+    this.retrieveRooms();
+  }
+  handleClose = () => {
+    this.setState({ show: false });
+    this.retrieveRooms();
+  }
+  handleCloseAdd = () => {
+    this.setState({ showAdd: false });
+    this.retrieveRooms();
+  }
   handleShow = () => this.setState({ show: false });
-  handleClick = (data) => {
+  handleShowAdd = () => { this.setState({ showAdd: true }) }
+  handleClickEdit = (data) => {
     this.setState({ show: true, objData: data })
+  };
+  handleClickAdd = () => {
+    this.setState({ showAdd: true })
   }
   render() {
     return (
@@ -54,29 +81,33 @@ class RoomManager extends React.Component {
         <Container>
           <Col>
             <Row className="justify-content-md-center pt-4">
-              <h1>Room Manager</h1>
+              <h1 className="text-white">Room Manager</h1>
             </Row>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center tableBackground">
               <MDBDataTable
-                btn
+                hover
                 striped
-                small
                 bordered
-                autoWidth
                 responsive
-                entries={8}
-                dark
-                tbodyTextWhite
-                theadTextWhite
+                entries={7}
                 displayEntries={false}
                 paging={true}
                 data={this.state}
                 noBottomColumns
+                sortable
               />
             </Row>
             <Row className="justify-content-md-center pt-5 flex" sm={6}>
-              <ShowAddModal state={this.state}></ShowAddModal>
+              <Button onClick={this.handleClickAdd} variant="light">Add Room</Button>
+              <Button onClick={this.deleteRooms}>Clear Rooms</Button>
+              <ShowAddModal
+                retrieve={this.retrieveRooms}
+                handleNoSaveCloseAdd={this.handleNoSaveCloseAdd}
+                handleShowAdd={this.handleShowAdd}
+                handleCloseAdd={this.handleCloseAdd}
+                showAdd={this.state.showAdd}></ShowAddModal>
               <ShowEditModal
+                retrieve={this.retrieveRooms}
                 handleNoSaveClose={this.handleNoSaveClose}
                 handleShow={this.handleShow}
                 handleClose={this.handleClose}

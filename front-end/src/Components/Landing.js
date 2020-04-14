@@ -22,12 +22,11 @@ export default class Landing extends React.Component {
   */
   notificationSystem = React.createRef();
   addNotification = (event) => {
-    event.preventDefault();
     const notification = this.notificationSystem.current;
     if (this.state.name === undefined || this.state.name === "") {
       notification.addNotification({
         message: "Please enter a username.", //message to be displayed
-        level: "warning", //type of notification (success, error, warning, info)
+        level: "error", //type of notification (success, error, warning, info)
       });
     } else if (
       this.state.selectedRoom === undefined ||
@@ -35,7 +34,7 @@ export default class Landing extends React.Component {
     ) {
       notification.addNotification({
         message: "Please select a room to join.",
-        level: "warning",
+        level: "error",
       });
     } else {
       this.setState(
@@ -80,7 +79,6 @@ export default class Landing extends React.Component {
 
   onEnterKey = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
       this.addNotification();
     }
   };
@@ -91,18 +89,14 @@ export default class Landing extends React.Component {
   whichToRender = () => {
     if (this.state.navLocation === "") {
       return (
-        <Container className="landingContainer">
+        <Container fluid className="landingContainer">
           <Col>
-            <Row className="float-right" sm={1}>
-              <Button size="sm" variant="dark" onClick={this.setLocLogin}>
-                Admin Panel
-              </Button>
-            </Row>
+
             <Row className="justify-content-md-center">
               <h1 className="display-5">Chat Application</h1>
             </Row>
-            <Row className="row justify-content-center" sm={2}>
-              <InputGroup>
+            <Row className="justify-content-center">
+              <InputGroup className="w-25">
                 <InputGroup.Text>Name:</InputGroup.Text>
                 <Form.Control
                   onKeyDown={this.onEnterKey}
@@ -110,27 +104,30 @@ export default class Landing extends React.Component {
                   type="text"
                   placeholder="Enter Username"
                 />
-                <button onClick={this.addNotification} variant="dark">
+                <Button onClick={this.addNotification} variant="light">
                   Enter Room!
-                </button>
+                </Button>
                 <NotificationSystem ref={this.notificationSystem} />
               </InputGroup>
             </Row>
-            <Row>
-              <br />
-            </Row>
+            <br />
             <Row className="row justify-content-center">
               <b>Selected Room: {this.state.selectedRoom}</b>
             </Row>
-            <Row className="row justify-content-center" sm={3}>
-              <Col>
-                <RoomList
-                  onRoomSelect={this.selectionMade}
-                ></RoomList>
-              </Col>
+            <br />
+            <Row className="row justify-content-center">
+              <RoomList
+                onRoomSelect={this.selectionMade}
+              ></RoomList>
+            </Row>
+            <br />
+            <Row className="row justify-content-center">
+              <Button className="adminButt" variant="light" onClick={this.setLocLogin}>
+                Admin Panel
+              </Button>
             </Row>
           </Col>
-        </Container>
+        </Container >
       );
     } else if (this.state.navLocation === "NameSet") {
       return (

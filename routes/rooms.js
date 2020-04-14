@@ -37,11 +37,11 @@ server.route("/edit-room").patch((req, res, next) => {
 })
 
 // Delete All Entries Disabled/Not In Use
-// server.route("/delete-all").delete((req, res) => {
-//   roomModel.deleteMany({}, (err, result) => {
-//     if (err) res.send(err);
-//     else res.send(result);
-//   })
-// })
+server.route("/delete-all").delete((req, res) => {
+  roomModel.deleteMany({}, (err, result) => {
+    if (err) res.send(err);
+    else res.send(result);
+  })
+})
 
 module.exports = server;

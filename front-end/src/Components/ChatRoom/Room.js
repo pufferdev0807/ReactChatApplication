@@ -11,25 +11,23 @@ export default class App extends React.Component {
       alltext: [],
       room: this.props.selectedRoom,
       name: this.props.name,
-      userList: this.props.userList,
+      userList: this.props.userList
     };
   }
   render() {
     return (
-      <Container className="chatContainer">
-        <Row className="justify-content-md-center">
-          <Col sm={9}>
-            <h1>{this.state.room}</h1>
-            <MessageArea alltext={this.state.alltext}></MessageArea>
-            <MessageComposer
-              room={this.state.room}
-              name={this.state.name}
-            ></MessageComposer>
+      <Container fluid className="fill">
+        <h1 className="justify-content-center backgroundGray display-4 pb-3">{this.state.room}</h1>
+        <Row>
+          <Col className="messageWindow" md={10} sm={12}>
+            <MessageArea room={this.state.room} alltext={this.state.alltext} />
           </Col>
-          <Col sm={3} className="d-none d-sm-block">
-            <UserList userList={this.state.userList} /></Col>
+          <Col className="d-none d-sm-block">
+            <UserList userList={this.state.userList} md={2} />
+          </Col>
         </Row>
-      </Container >
+        <MessageComposer room={this.state.room} name={this.state.name}></MessageComposer>
+      </Container>
     );
   }
 }

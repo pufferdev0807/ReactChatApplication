@@ -46,7 +46,7 @@ class Login extends React.Component {
   whichToRender = () => {
     if (this.state.navLocation === "") {
       return (
-        <Container className="landingContainer">
+        <Container fluid className="landingContainer">
           <Col>
             <Row className="justify-content-md-center">
               <h1>Admin Login</h1>
@@ -61,7 +61,7 @@ class Login extends React.Component {
                   Password:
                   <Form.Control onChange={this.handleChange} id="password" type="password" placeholder="Password" />
                 </Form.Group>
-                <Button onClick={this.handleSubmit} variant="dark" type="submit">
+                <Button onClick={this.handleSubmit} variant="light" type="submit">
                   Login
                 </Button>
               </Form>

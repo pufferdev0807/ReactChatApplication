@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001;
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
+const io = socketIO(server, { 'pingInterval': 2000, 'pingTimeout': 3000 });
 
 let conf = require("./conf/dbconf");
 
@@ -126,6 +126,7 @@ io.on("connection", (socket) => {
       );
       userList[room] = userList[room].filter((usr) => usr !== data.name);
       io.to(`${room}`).emit("updateList", userList[room]);
+      console.log(userList[room]);
     } else {
     }
   });

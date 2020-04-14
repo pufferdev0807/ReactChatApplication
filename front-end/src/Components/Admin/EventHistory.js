@@ -20,7 +20,8 @@ class EventHistory extends React.Component {
           let newColumnEntry = {
             label: item,
             field: item,
-            sort: "asc",
+            sort: "desc",
+            width: 150
           };
           return dataColumns.push(newColumnEntry);
         });
@@ -34,18 +35,16 @@ class EventHistory extends React.Component {
         <Container>
           <Col>
             <Row className="justify-content-md-center pt-4">
-              <h1>Event History</h1>
+              <h1 className="text-white">Event History</h1>
             </Row>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center tableBackground">
               <MDBDataTable
+                hover
                 striped
-                small
+                maxHeight="500px"
                 bordered
                 responsive
-                entries={8}
-                dark
-                tbodyTextWhite
-                theadTextWhite
+                entries={5}
                 displayEntries={false}
                 paging={true}
                 data={this.state}

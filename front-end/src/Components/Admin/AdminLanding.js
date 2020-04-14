@@ -27,10 +27,10 @@ class AdminLanding extends React.Component {
   render() {
     return (
       <>
-        <Container className="landingContainer">
+        <Container fluid className="adminContainer">
           <Col>
             <Row className="justify-content-md-end" sm={12}>
-              <Button size="sm" type="button" variant="dark">
+              <Button href="/" size="sm" type="button" variant="light">
                 Logout
               </Button>
             </Row>
@@ -39,7 +39,7 @@ class AdminLanding extends React.Component {
                 <Row sm={3} className="justify-content-md-end">
                   <Button
                     type="button"
-                    variant="dark"
+                    variant="light"
                     onClick={() => this.setLocation("eventHistory")}
                   >
                     Event History
@@ -50,7 +50,7 @@ class AdminLanding extends React.Component {
                 <Row sm={3} className="justify-content-md-center">
                   <Button
                     type="button"
-                    variant="dark"
+                    variant="light"
                     onClick={() => this.setLocation("chatHistory")}
                   >
                     Chat History
@@ -61,7 +61,7 @@ class AdminLanding extends React.Component {
                 <Row sm={3} className="justify-content-md-start">
                   <Button
                     type="button"
-                    variant="dark"
+                    variant="light"
                     onClick={() => this.setLocation("roomManager")}
                   >
                     Rooms
@@ -69,6 +69,7 @@ class AdminLanding extends React.Component {
                 </Row>
               </Col>
             </Row>
+            <br />
             <Row className="justify-content-md-center">
               <this.whichToRender />
             </Row>

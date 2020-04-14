@@ -5,7 +5,7 @@ import Axios from "axios";
 
 const ShowEditModal = (props) => {
   let show = props.show;
-
+  let retrieve = props.retrieve;
   let handleClose = props.handleClose;
   let handleNoSaveClose = props.handleNoSaveClose;
   let data, roomName, roomid, stat;
@@ -17,19 +17,26 @@ const ShowEditModal = (props) => {
   }
 
   let editRoom = () => {
-    Axios.patch("http://localhost:3001/api/rooms/edit-room", {
-      Name: roomName,
-      _id: roomid,
-      Status: stat
-    }).then((response) => {
-      //edit successful
-    }).catch((error) => {
-      //error
-    })
+    if (roomName !== "") {
+      Axios.patch("http://localhost:3001/api/rooms/edit-room", {
+        Name: roomName,
+        _id: roomid,
+        Status: stat
+      }).then((response) => {
+        alert("Room has been saved!")
+      }).catch((error) => {
+        //error
+      })
+    }
+    else {
+      alert("Room name cannot be empty!")
+    }
   };
 
   handleClose = () => {
     editRoom();
+    handleNoSaveClose();
+    retrieve();
   }
   let handlePillChange = (value) => {
     if (stat !== undefined)
@@ -40,7 +47,7 @@ const ShowEditModal = (props) => {
   };
   return (
     <>
-      <Modal animation={false} show={show} onHide={handleNoSaveClose}>
+      <Modal animation={true} show={show} onHide={handleNoSaveClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Room</Modal.Title>
         </Modal.Header>
@@ -56,7 +63,7 @@ const ShowEditModal = (props) => {
           />
           <br></br>
           Status:
-          <Nav variant="pills" defaultActiveKey="Active">
+          <Nav variant="pills">
             <Nav.Item>
               <Nav.Link onSelect={handlePillChange} eventKey="Active">
                 Active
@@ -70,10 +77,10 @@ const ShowEditModal = (props) => {
           </Nav>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleNoSaveClose}>
+          <Button variant="dark" onClick={handleNoSaveClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="dark" onClick={handleClose}>
             Save Changes
           </Button>
         </Modal.Footer>

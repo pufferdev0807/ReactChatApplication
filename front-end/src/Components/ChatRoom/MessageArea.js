@@ -22,21 +22,19 @@ class MessageArea extends React.Component {
   render() {
     return (
       <>
-        <b id="head">Chat Log:</b>
         <div id="messageArea">
-          <br />
+          {`Welcome to ${this.props.room} chatroom!`}<br />
+          {`All messages are being logged.`}
+          <br /><br />
           {this.state.alltext !== []
             ? this.state.alltext.map((val, ctr) => {
               return (
                 <div className="entry" key={ctr}>
                   <p>
-                    <b>{val.by}</b> -{" "}
-                    <small>
-                      <i>{val.time}</i>{" "}
-                    </small>{" "}
-                    <br></br> {val.msg}
+                    <b>{val.by}: </b>{"   "}
+                    {val.msg} -
+                    <small><i > {val.time}</i></small>
                   </p>
-                  <br />
                 </div>
               );
             })

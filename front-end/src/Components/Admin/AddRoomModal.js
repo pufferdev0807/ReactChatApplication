@@ -1,41 +1,49 @@
 import Modal from "react-bootstrap/Modal";
-import React, { useState } from "react";
+import React from "react";
 import { Button, Form, Nav } from "react-bootstrap";
 import Axios from "axios";
 
-const ShowAddModal = () => {
+const ShowAddModal = (props) => {
+  let show = props.showAdd;
+  let retrieve = props.retrieve;
+  let handleClose = props.handleClose;
+  let handleNoSaveCloseAdd = props.handleNoSaveCloseAdd;
   let roomName = "";
   let stat = "Active";
   let addRoom = () => {
-    Axios.post("http://localhost:3001/api/rooms/add-room", {
-      Name: roomName,
-      Status: stat,
-    })
-      .then((response) => {
+    if (roomName !== "") {
+      Axios.post("http://localhost:3001/api/rooms/add-room", {
+        Name: roomName,
+        Status: stat,
       })
-      .catch((error) => {
-      });
+        .then((response) => {
+          alert("Room has been added!")
+        })
+        .catch((error) => {
+        });
+    }
+    else {
+      alert("Room name cannot be empty!")
+    }
   };
+
+
   let handlePillChange = (value) => {
-    stat = value;
+    if (stat !== undefined)
+      stat = value;
   };
   let handleChange = (event) => {
     roomName = event.target.value;
   };
-  const [show, setShow] = useState(false);
-  const handleNoSaveClose = () => setShow(false);
-  const handleClose = () => {
-    setShow(false);
+
+  handleClose = () => {
     addRoom();
-  };
-  const handleShow = () => setShow(true);
+    handleNoSaveCloseAdd();
+    retrieve();
+  }
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
-        Add Room
-      </Button>
-
-      <Modal animation={false} show={show} onHide={handleNoSaveClose}>
+      <Modal animation={true} show={show} onHide={handleNoSaveCloseAdd}>
         <Modal.Header closeButton>
           <Modal.Title>Add Room</Modal.Title>
         </Modal.Header>
@@ -63,10 +71,10 @@ const ShowAddModal = () => {
           </Nav>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleNoSaveClose}>
+          <Button variant="dark" onClick={handleNoSaveCloseAdd}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="dark" onClick={handleClose}>
             Add Room
           </Button>
         </Modal.Footer>
@@ -76,3 +84,4 @@ const ShowAddModal = () => {
 };
 
 export default ShowAddModal;
+

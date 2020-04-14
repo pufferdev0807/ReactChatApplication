@@ -19,18 +19,23 @@ class MessageComposer extends React.Component {
   handleSubmit = () => { };
 
   sendMessage = () => {
-    // substitute time for something more meaningful
     let time = moment().format("HH:mm:ss");
     if (this.state.msg !== "") {
-      let message = {
-        by: this.state.name,
-        msg: this.state.msg,
-        room: this.state.room,
-        time: time,
-      };
-      socket.emit("message", message);
+      console.log(`length of message is ${this.state.msg.length} characters`)
+      if (this.state.msg.length < 2000) {
+        let message = {
+          by: this.state.name,
+          msg: this.state.msg,
+          room: this.state.room,
+          time: time,
+        };
+        socket.emit("message", message);
+        this.setState({ msg: '' });
+      }
+      else {
+        alert(`Character (${this.state.msg.length}) limit of 2000 exceeded`);
+      }
     }
-    this.setState({ msg: '' });
   };
 
   onEnterKey = (e) => {
@@ -41,19 +46,19 @@ class MessageComposer extends React.Component {
   };
   render() {
     return (
-      <InputGroup className="composeArea">
+      <InputGroup>
         <Form.Control
+          bsPrefix
           as="textarea"
-          size="lg"
           name="msg"
-          value={this.state.msg}
           className="composeField"
+          value={this.state.msg}
           onKeyDown={this.onEnterKey}
           onChange={this.handleFields}
           type="text"
           placeholder="Type here..."
         />
-        <Button type="submit" variant="dark" onClick={this.sendMessage}>
+        <Button bsPrefix className="composeButton" type="submit" onClick={this.sendMessage}>
           Send
         </Button>
       </InputGroup>
