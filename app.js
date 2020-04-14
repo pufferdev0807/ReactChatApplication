@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001;
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server, { 'pingInterval': 2000, 'pingTimeout': 3000 });
+const io = socketIO(server);
 
 let conf = require("./conf/dbconf");
 
