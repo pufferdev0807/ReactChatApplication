@@ -13,6 +13,9 @@ admin/password
 ## Instructions
 Application deployed at:
 - [AWS](http://ec2-18-224-228-195.us-east-2.compute.amazonaws.com/)
+- To run node server just serve with 'node app.js'. I used PM2.
+- To serve the react pages build with 'npm run-script build' and serve with Apache of Nginx.
+- To get application to run on EC2 we used a reverse proxy to point to localhost to allow a connection to Node @ port 3001.
 
 ## Frontend
 
