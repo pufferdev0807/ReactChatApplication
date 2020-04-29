@@ -1,6 +1,6 @@
 # General Specifications
 
-## Contributors
+## Maintainers
 
 ###### Klifford Agujar [Github](https://github.com/ashencat)
 ###### Kevin Hy [Github](https://github.com/kevin-hy)
