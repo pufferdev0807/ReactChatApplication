@@ -2,9 +2,9 @@
 
 ## Project Members
 
-- Klifford Agujar 101145584
-- Kevin Hy 101078240
-- Igor Teixeira Belem 100907699
+###### Klifford Agujar [Github](https://github.com/ashencat)
+###### Kevin Hy [Github](https://github.com/kevin-hy)
+###### Igor Teixeira Belem [Github](https://github.com/itbel/)
 
 ## Admin Credentials
 
