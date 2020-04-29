@@ -18,6 +18,24 @@ Application deployed at:
 - To get application to run on EC2 we used a reverse proxy to point to localhost to allow a connection to Node @ port 3001.
 - Using mongodb Atlas for database. Configure dbconf.js to suit your db configuration.
 
+## Images
+#### Landing View
+![Landing](https://github.com/itbel/ReactChatApplication/blob/master/images/LandingPage.png?raw=true)
+#### Chatroom View
+![Chatroom](https://github.com/itbel/ReactChatApplication/blob/master/images/Chatroom.png?raw=true)
+#### Admin Login View
+![AdminLogin](https://github.com/itbel/ReactChatApplication/blob/master/images/AdminLogin.png?raw=true)
+#### Admin Landing View
+![AdminLanding](https://github.com/itbel/ReactChatApplication/blob/master/images/AdminLanding.png?raw=true)
+#### Chat History View
+![ChatHistory](https://github.com/itbel/ReactChatApplication/blob/master/images/ChatHistory.png?raw=true)
+#### Room List View
+![RoomList](https://github.com/itbel/ReactChatApplication/blob/master/images/RoomList.png?raw=true)
+#### Add Room Modal
+![AddRoomModal](https://github.com/itbel/ReactChatApplication/blob/master/images/AddRoomModal.png?raw=true)
+#### Edit Room Modal
+![EditRoomModal](https://github.com/itbel/ReactChatApplication/blob/master/images/EditRoomModal.png?raw=true)
+
 ## Frontend
 
 - [x] Base frontend chat app W/ Socket.io
@@ -63,21 +81,3 @@ Application deployed at:
 - [body-parser](https://github.com/expressjs/body-parser)
 - [morgan](https://github.com/expressjs/morgan)
 - [helmet](https://github.com/helmetjs/helmet)
-
-## Images
-#### Landing View
-![Landing](https://github.com/itbel/ReactChatApplication/blob/master/images/LandingPage.png?raw=true)
-#### Chatroom View
-![Chatroom](https://github.com/itbel/ReactChatApplication/blob/master/images/Chatroom.png?raw=true)
-#### Admin Login View
-![AdminLogin](https://github.com/itbel/ReactChatApplication/blob/master/images/AdminLogin.png?raw=true)
-#### Admin Landing View
-![AdminLanding](https://github.com/itbel/ReactChatApplication/blob/master/images/AdminLanding.png?raw=true)
-#### Chat History View
-![ChatHistory](https://github.com/itbel/ReactChatApplication/blob/master/images/ChatHistory.png?raw=true)
-#### Room List View
-![RoomList](https://github.com/itbel/ReactChatApplication/blob/master/images/RoomList.png?raw=true)
-#### Add Room Modal
-![AddRoomModal](https://github.com/itbel/ReactChatApplication/blob/master/images/AddRoomModal.png?raw=true)
-#### Edit Room Modal
-![EditRoomModal](https://github.com/itbel/ReactChatApplication/blob/master/images/EditRoomModal.png?raw=true)
