@@ -62,9 +62,9 @@ Application deployed at:
 
 ## API targets
 
-`htttp://localhost:${port}/api/events`
-`htttp://localhost:${port}/api/chatlog`
-`htttp://localhost:${port}/api/rooms`
+- `htttp://localhost:${port}/api/events`
+- `htttp://localhost:${port}/api/chatlog`
+- `htttp://localhost:${port}/api/rooms`
 
 ## Technologies
 
