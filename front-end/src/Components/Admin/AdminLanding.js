@@ -64,7 +64,7 @@ class AdminLanding extends React.Component {
                     variant="light"
                     onClick={() => this.setLocation("roomManager")}
                   >
-                    Rooms
+                    Teams
                   </Button>
                 </Row>
               </Col>

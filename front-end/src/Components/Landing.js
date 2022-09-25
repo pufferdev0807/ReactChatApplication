@@ -1,10 +1,13 @@
 import React from "react";
+import LoginModal from "react-login-modal";
 import { Form, Button, InputGroup, Container, Row, Col } from "react-bootstrap";
 import RoomList from "./RoomList";
 import Room from "./ChatRoom/Room";
 import { socket } from "../App";
 import NotificationSystem from "react-notification-system";
 import Login from "./Admin/Login";
+import AdminLanding from "./Admin/AdminLanding";
+import Axios from "axios";
 
 export default class Landing extends React.Component {
   constructor(props) {
@@ -86,10 +89,64 @@ export default class Landing extends React.Component {
     this.setState({ navLocation: "loginScreen" });
   };
 
+  handleSignup = (username, email, password) => {
+    Axios.post('http://localhost:3001/api/users/register', {
+        Username: username,
+        Password: password,
+        Email: email
+      })
+        .then((response) => {
+          if (response.data.msg === "Invalid Credentials!") {
+          }
+          else {
+            if(response.data.Role === 1) {
+              this.setState({ navLocation: "Admin", name: username });
+            } else if (response.data.Role === 2) {
+
+            } else {
+              this.setState({ navLocation: "NormalUser", name: username });
+            }
+          }
+        })
+        .catch((error) => {
+        })
+  };
+  handleLogin = (username, password) => {
+    if (username !== "" && password !== "") {
+      Axios.post('http://localhost:3001/api/users/login', {
+        Username: username,
+        Password: password
+      })
+        .then((response) => {
+          if (response.data.msg === "Invalid Credentials!") {
+          }
+          else {
+            if(response.data.Role === 1) {
+              this.setState({ navLocation: "Admin", name: response.data.Username });
+            } else if (response.data.Role === 2) {
+
+            } else {
+              this.setState({ navLocation: "NormalUser", name: response.data.Username });
+            }
+          }
+        })
+        .catch((error) => {
+        })
+    }
+  };
+
   whichToRender = () => {
     if (this.state.navLocation === "") {
       return (
+          <LoginModal
+            handleSignup={this.handleSignup}
+            handleLogin={this.handleLogin}
+          />
+      );
+    } else if (this.state.navLocation === "NormalUser") {
+      return (
         <Container fluid className="landingContainer">
+
           <Col>
 
             <Row className="justify-content-md-center">
@@ -100,19 +157,21 @@ export default class Landing extends React.Component {
                 <InputGroup.Text>Name:</InputGroup.Text>
                 <Form.Control
                   onKeyDown={this.onEnterKey}
-                  onChange={this.handleChange}
+                  // onChange={this.handleChange}
+                  disabled={true}
+                  value={this.state.name}
                   type="text"
                   placeholder="Enter Username"
                 />
                 <Button onClick={this.addNotification} variant="light">
-                  Enter Room!
+                  Enter Team!
                 </Button>
                 <NotificationSystem ref={this.notificationSystem} />
               </InputGroup>
             </Row>
             <br />
             <Row className="row justify-content-center">
-              <b>Selected Room: {this.state.selectedRoom}</b>
+              <b>Selected Team: {this.state.selectedRoom}</b>
             </Row>
             <br />
             <Row className="row justify-content-center">
@@ -121,14 +180,18 @@ export default class Landing extends React.Component {
               ></RoomList>
             </Row>
             <br />
-            <Row className="row justify-content-center">
+            {/* <Row className="row justify-content-center">
               <Button className="adminButt" variant="light" onClick={this.setLocLogin}>
                 Admin Panel
               </Button>
-            </Row>
+            </Row> */}
           </Col>
         </Container >
-      );
+      )
+    } else if (this.state.navLocation === "Admin") {
+      return (
+        <AdminLanding/>
+      )
     } else if (this.state.navLocation === "NameSet") {
       return (
         <Room

@@ -74,7 +74,7 @@ class RoomManager extends React.Component {
         <Container>
           <Col>
             <Row className="justify-content-md-center pt-4">
-              <h1 className="text-white">Room Manager</h1>
+              <h1 className="text-white">Team Manager</h1>
             </Row>
             <Row className="justify-content-md-center tableBackground">
               <MDBDataTable
@@ -91,7 +91,7 @@ class RoomManager extends React.Component {
               />
             </Row>
             <Row className="justify-content-md-center pt-5 flex" sm={6}>
-              <Button onClick={this.handleClickAdd} variant="light">Add Room</Button>
+              <Button onClick={this.handleClickAdd} variant="light">Add Team</Button>
               <ShowAddModal
                 retrieve={this.retrieveRooms}
                 handleNoSaveCloseAdd={this.handleNoSaveCloseAdd}

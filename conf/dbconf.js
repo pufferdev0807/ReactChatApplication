@@ -1,3 +1,3 @@
-let cloud = "mongodb+srv://dbUser:dbUserPassword@chatapp-fn0kv.mongodb.net/test?retryWrites=true&w=majority";
+let cloud = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 
 module.exports = cloud;

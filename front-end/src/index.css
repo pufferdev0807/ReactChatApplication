@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.styles_loginContainer__1OP_F {
+  width: 500px !important;
+}
+
+.styles_loginContainer__1OP_F button {
+  width: 150px !important;
+}

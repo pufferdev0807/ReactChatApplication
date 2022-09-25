@@ -26,21 +26,22 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     if (err) throw err;
-    else { }
+    else {
+    }
   }
 );
 
-mongoose.set('useCreateIndex', true);
+mongoose.set("useCreateIndex", true);
 let userList = {};
 
 roomModel.find({}, { status: false }, (err, doc) => {
   if (err) throw err;
   else {
-    doc.map(value => {
-      return userList[value.Name] = [];
+    doc.map((value) => {
+      return (userList[value.Name] = []);
     });
   }
-})
+});
 
 io.on("connection", (socket) => {
   eventHistoryModel.create(
@@ -52,7 +53,8 @@ io.on("connection", (socket) => {
         .substr(0, 5),
     },
     (err, doc) => {
-      if (err) { }
+      if (err) {
+      }
     }
   );
 
@@ -78,7 +80,8 @@ io.on("connection", (socket) => {
                 .substr(0, 5),
             },
             (err, doc) => {
-              if (err) { }
+              if (err) {
+              }
             }
           );
         }
@@ -88,32 +91,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("usersListUpdate", (data) => {
-    room = data.room;
-    socket.join(`${room}`);
-    eventHistoryModel.create(
-      {
-        type: "JOINED",
-        user: data.name,
-        PPID: Math.random()
-          .toString(36)
-          .replace(/[^a-z]+/g, "")
-          .substr(0, 5),
-      },
-      (err, doc) => {
-        if (err) { }
-      }
-    );
-    userList[room] = [...userList[room], data.name];
-    io.to(`${room}`).emit("updateList", userList[data.room]);
-  });
-
-  socket.on("user-disconnect", (data) => {
-    if (typeof data.room !== "undefined" || typeof data.name !== "undefined") {
+    try {
       room = data.room;
-      socket.leave(room);
+      socket.join(`${room}`);
       eventHistoryModel.create(
         {
-          type: "DISCONNECT",
+          type: "JOINED",
           user: data.name,
           PPID: Math.random()
             .toString(36)
@@ -121,13 +104,44 @@ io.on("connection", (socket) => {
             .substr(0, 5),
         },
         (err, doc) => {
-          if (err) { }
+          if (err) {
+          }
         }
       );
-      userList[room] = userList[room].filter((usr) => usr !== data.name);
-      io.to(`${room}`).emit("updateList", userList[room]);
-      console.log(userList[room]);
-    } else {
+      userList[room] = [...userList[room], data.name];
+      io.to(`${room}`).emit("updateList", userList[data.room]);
+    } catch (e) {}
+  });
+
+  socket.on("user-disconnect", (data) => {
+    try {
+      if (
+        typeof data.room !== "undefined" ||
+        typeof data.name !== "undefined"
+      ) {
+        room = data.room;
+        socket.leave(room);
+        eventHistoryModel.create(
+          {
+            type: "DISCONNECT",
+            user: data.name,
+            PPID: Math.random()
+              .toString(36)
+              .replace(/[^a-z]+/g, "")
+              .substr(0, 5),
+          },
+          (err, doc) => {
+            if (err) {
+            }
+          }
+        );
+        userList[room] = userList[room].filter((usr) => usr !== data.name);
+        io.to(`${room}`).emit("updateList", userList[room]);
+        console.log(userList[room]);
+      } else {
+      }
+    } catch (e) {
+      console.error("user-disconnect: ", e);
     }
   });
 });
@@ -154,13 +168,13 @@ app.use("/api/rooms", roomRoute);
 app.use("/api/users", userRoute);
 
 app.use((req, res, next) => {
-  if (res.status === 200) res.status = 404
-  next()
+  if (res.status === 200) res.status = 404;
+  next();
 });
 
 app.use((err, req, res, next) => {
   let error = new Error("Unable to fetch requested data...");
-  res.json(error)
-})
+  res.json(error);
+});
 
 server.listen(port, () => `API running @ port ${port}`);

@@ -8,8 +8,17 @@ let User = new Schema(
       unique: true,
       required: true,
     },
+    Email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     Password: {
       type: String,
+      required: true,
+    },
+    Role: {
+      type: Number,
       required: true,
     },
   },

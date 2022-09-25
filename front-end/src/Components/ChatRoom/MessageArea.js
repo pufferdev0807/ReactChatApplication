@@ -1,5 +1,6 @@
 import React from "react";
 import { socket } from "../../App";
+import AvatarImg from "./avatar.png";
 
 class MessageArea extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class MessageArea extends React.Component {
             ? this.state.alltext.map((val, ctr) => {
               return (
                 <div className="entry" key={ctr}>
+                  <img src={AvatarImg} style={{width: 60, height: 60, marginRight: 10}} alt="" />
                   <p>
                     <b>{val.by}: </b>{"   "}
                     {val.msg} -
